@@ -1,0 +1,51 @@
+
+
+/*.grecaptcha-badge { visibility: hidden !important; }*/
+.containerHome{
+    background-color: rgb(54, 11, 11);
+    width : 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.formHome{
+    background-color: rgb(18, 88, 148);
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.formHome form{
+    background-color: rgb(210, 104, 104);
+    width: 50%;
+    height: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.iconForm{
+    background-color: rgb(255, 255, 255);
+    width: 20%;
+    height: 10%;
+    border-radius: 12px;
+}
+
+.imgBackgroundHome{
+    background-color:rgb(255, 255, 255);
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
