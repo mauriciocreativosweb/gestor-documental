@@ -18,7 +18,10 @@ class UserSeeder extends Seeder
             $admin = User::create([
                 'name' => 'admin',
                 'email' => 'admin@gmail.com',
-                'password' =>  Hash::make('admin1234')
+                'password' =>  Hash::make('admin1234'),
+                'cellphone' => 0000000000,
+                'state' => 1,
+                'icon' => 'admin.jpg'
             ]);
     
             $admin->assignRole('admin');
@@ -26,7 +29,10 @@ class UserSeeder extends Seeder
             $review = User::create([
                 'name' => 'review',
                 'email' => 'review@gmail.com',
-                'password' => Hash::make('review1234')
+                'password' => Hash::make('review1234'),
+                'cellphone' => 0000000000,
+                'state' => 1,
+                'icon' => 'review.jpg'
             ]);
     
             $review->assignRole('review');
@@ -34,7 +40,10 @@ class UserSeeder extends Seeder
             $user = User::create([
                 'name' => 'user',
                 'email' => 'user@gmail.com',
-                'password' => Hash::make('user1234')
+                'password' => Hash::make('user1234'),
+                'cellphone' => 0000000000,
+                'state' => 1,
+                'icon' => 'user.jpg'
             ]);
     
             $user->assignRole('user');
