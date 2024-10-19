@@ -21,7 +21,8 @@ class UserSeeder extends Seeder
                 'password' =>  Hash::make('admin1234'),
                 'cellphone' => 0000000000,
                 'state' => 1,
-                'icon' => 'admin.jpg'
+                'icon' => 'admin.jpg',
+                'user_code' => 000000
             ]);
     
             $admin->assignRole('admin');
@@ -32,7 +33,8 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('review1234'),
                 'cellphone' => 0000000000,
                 'state' => 1,
-                'icon' => 'review.jpg'
+                'icon' => 'review.jpg',
+                'user_code' => 000000
             ]);
     
             $review->assignRole('review');
@@ -43,7 +45,8 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('user1234'),
                 'cellphone' => 0000000000,
                 'state' => 1,
-                'icon' => 'user.jpg'
+                'icon' => 'user.jpg',
+                'user_code' => 000000
             ]);
     
             $user->assignRole('user');
