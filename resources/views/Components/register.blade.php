@@ -21,7 +21,7 @@
         <label> Contraseña </label>
         <input type="password" name="password">
         @error('password')
-            <div> Por favor escriba el password</div>
+            <div> Por favor escriba el password.</div>
         @enderror
 
         <!-- Campo de ReCaptcha v3 -->
