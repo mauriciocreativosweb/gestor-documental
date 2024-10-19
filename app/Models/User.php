@@ -8,6 +8,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Exception;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendEmailCode;
+use App\Models\UserEmailCode;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -45,5 +52,24 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function userEmailCode(): HasOne{
+        return $this->hasOne(UserEmailCode::class);
+    }
+
+    public function generateCode(){
+        try{
+            $code = rand(100000, 999999);
+            $sendEmail = UserEmailCode::updateOrCreate(
+                ['user_id' => Auth::id()],
+                ['code' => $code]
+            );
+            User::where(['id'=> Auth::id()])->update(['user_code'=> $sendEmail['id']]);
+            Mail::to(Auth::user()['email'])->send(new SendEmailCode($sendEmail));
+            return $this->hasOne(User::class, 'user_code', 'id');;  
+        }catch(Exception $e){
+            info ('Error : '. $e->getMessage());
+        }
     }
 }

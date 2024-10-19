@@ -36,11 +36,14 @@ return new class extends Migration
             $table->integer('last_activity')->index();
         });
 
-        Schema::table('users', function(Blueprint $table){
+        Schema::table('users', function (Blueprint $table) {
             $table->string('cellphone', 10);
             $table->string('state');
             $table->string('icon');
+            $table->integer('user_code');
         });
+
+        
     }
 
     /**

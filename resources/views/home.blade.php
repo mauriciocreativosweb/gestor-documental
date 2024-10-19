@@ -1,3 +1,9 @@
+<?php 
+    print_r(session()->all());
+    echo "<br>";
+
+?>
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -17,7 +23,7 @@
     <body>  
         <div class="containerHome">
             <x-register></x-register>
-            <!--<x-login></x-login>-->
+            <x-login></x-login>
             <aside class="imgBackgroundHome">
               
 
