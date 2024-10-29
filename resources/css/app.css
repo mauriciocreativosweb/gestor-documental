@@ -1,5 +1,115 @@
+@font-face {
+    font-family: 'LeagueSpartan';
+    src: url('/img/LeagueSpartan.ttf') format('truetype'); /* Cambia la ruta al archivo de fuente si es necesario */
+    font-weight: normal;
+    font-style: normal;
+}
+
+h2{
+    font-family: 'LeagueSpartan', sans-serif; 
+}
+
 body{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+p{
+    color:#868686;
+}
+
+textarea:focus {
+    border: 2px solid #47A1A8!important;
+    outline: none; 
+    border-radius: 12px;
+    color:#868686;
+}
+
+input:focus {
+    border: 2px solid #47A1A8!important;
+    outline: none; 
+    border-radius: 12px;
+    color:#868686;
+}
+
+select:focus {
+    border: 2px solid #47A1A8!important;
+    outline: none; 
+    border-radius: 12px;
+    color:#868686;
+}
+
+/* Ocultar el botón de opción original */
+input[type="radio"] {
+    display: none; /* Ocultar el botón de opción real */
+}
+
+/* Estilo para la etiqueta que simula el botón de opción */
+.opciones label {
+    display: inline-block; /* Mostrar en línea */
+    width: 32%;
+    padding: 5px 0px;
+    background-color: #f0f0f0; /* Color de fondo predeterminado */
+    border: 2px solid transparent; /* Borde transparente por defecto */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor de puntero al pasar el mouse */
+    transition: background-color 0.3s, border-color 0.3s; /* Transición suave */
+    font-size: .7vw; /* Tamaño de fuente */
+    margin: 5px; /* Margen entre las opciones */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilo para la etiqueta cuando el radio button está seleccionado */
+input[type="radio"]:checked + label {
+    background-color: #47A1A8; /* Cambia el fondo cuando está seleccionado */
+    border-color: #47A1A8; /* Cambia el borde cuando está seleccionado */
+    color: white; /* Cambia el color del texto cuando está seleccionado */
+}
+
+/* Estilo para cambiar el color al pasar el mouse */
+.opciones label:hover {
+    background-color: #e0e0e0; /* Color de fondo al pasar el mouse */
+}
+
+
+
+
+/* Estilo del contenedor de la barra de desplazamiento */
+::-webkit-scrollbar {
+    width: 10px; /* Ancho de la barra de desplazamiento vertical */
+    height: 8px; /* Ancho de la barra de desplazamiento horizontal */
+}
+
+/* Estilo de la pista (background de la barra) */
+::-webkit-scrollbar-track {
+    background-color: #f0f0f0; /* Color del fondo de la barra */
+    border-radius: 10px;
+}
+
+/* Estilo del "thumb" (el botón que se desplaza) */
+::-webkit-scrollbar-thumb {
+    background-color: #47A1A8; /* Color del "thumb" */
+    border-radius: 10px; /* Bordes redondeados */
+    border: 1px solid #f0f0f0; /* Para crear un efecto de separación */
+}
+
+/* Estilo cuando se pasa el mouse sobre el "thumb" */
+::-webkit-scrollbar-thumb:hover {
+    background-color: #2E7B80; /* Color del "thumb" cuando se pasa el mouse por encima */
+}
+
+/*Ocultar capcha*/
+.grecaptcha-badge{
+    display: none;
+}
+
+/* Para navegadores WebKit (Chrome, Safari, Opera) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+

@@ -36,6 +36,8 @@ class AuthController extends Controller
                 $userNew->save();
                 $userNew->assignRole('user');
                 $userModel = User::find($userNew->id);
+                $credentials = $registerRequest->only('email','password');
+                Auth::attempt($credentials);
                 event(new Registered($userModel));
                 return back()->with('answer', Success::successUserRegister);
             }

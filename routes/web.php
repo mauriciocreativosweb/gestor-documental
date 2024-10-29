@@ -37,13 +37,27 @@ Route::controller(TwoFAController::class)->group(function(){
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
 Route::get('/user', function(){
-    return redirect()->view('user');
-})->middleware(['auth','auth:api'])->name('user');
+    return view('auth.user');
+})->middleware(['auth'])->name('user');
 
 Route::get('/review', function(){
-    return redirect()->view('review');
-})->middleware(['auth','auth:api'])->name('review');
+    return view('auth.review');
+})->middleware(['auth'])->name('review');
 
 Route::get('/admin', function(){
-    return redirect()->view('admin');
-})->middleware(['auth','auth:api'])->name('admin');
+    return view('auth.admin');
+})->middleware(['auth'])->name('admin');
+
+
+
+/*Route::get('/user', function(){
+    return view('user');
+})->name('user');
+
+Route::get('/review', function(){
+    return view('review');
+})->name('review');
+
+Route::get('/admin', function(){
+    return view('admin');
+})->name('admin');*/

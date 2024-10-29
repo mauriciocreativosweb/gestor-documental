@@ -7,6 +7,10 @@ use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Notifications\Messages\MailMessage;
 use Laravel\Passport\Passport;
 
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Mail\Message;
+
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -23,9 +27,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         
+
         VerifyEmail::toMailUsing(function (object $notifiable, string $url) {
-            return (new MailMessage)
-            ->view('Mail.Auth2FEmailVerify',['url' => $url]);
+            return (new MailMessage)->view('Mail.Auth2FEmailVerify',['url' => $url]);
         });
 
         Passport::enablePasswordGrant();

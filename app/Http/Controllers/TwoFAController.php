@@ -23,16 +23,17 @@ class TwoFAController extends Controller
                                     ->where('code', $request->code)
                                     ->where('updated_at', '>=', now()->subMinutes(1))
                                     ->first();
+
         if(!is_null($find)){
             $user = User::where('id',Auth::id())->first();
             if($user->hasRole('admin')){
-                    return view('auth.admin');
+                    return redirect('admin');
             }if($user->hasRole('review')){
-                    return view('auth.review');
+                    return redirect('review');
             }else{
-                return view('auth.user');
+                return redirect('user');
             }
-        }    
+        }
              
         return back()->with('message', 'Codigo incorrecto');
     }
