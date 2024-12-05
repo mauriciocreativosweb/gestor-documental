@@ -49,15 +49,4 @@ Route::get('/admin', function(){
 })->middleware(['auth'])->name('admin');
 
 
-
-/*Route::get('/user', function(){
-    return view('user');
-})->name('user');
-
-Route::get('/review', function(){
-    return view('review');
-})->name('review');
-
-Route::get('/admin', function(){
-    return view('admin');
-})->name('admin');*/
+?>

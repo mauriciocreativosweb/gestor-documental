@@ -5,7 +5,7 @@ import router from './router';
 
 
 
-createApp(App)
+/*createApp(App)
   .use(router)
-  .mount('#app');
+  .mount('#app');*/
 

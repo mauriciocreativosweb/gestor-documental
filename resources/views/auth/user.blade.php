@@ -7,11 +7,11 @@ $alertas = [
     ['id' => 3, 'contenido' => 'Se ha detectado un problema en el módulo 2.', 'estado' => 'activo']
 ];
 
-$usuario = [
+/*$usuario = [
     ['id' => 1, 'contenido' => 'Este es un mensaje de alerta común que podría estar relacionado con alguno de los módulos en cuestión, por favor verificar y recuperar.', 'estado' => 'activo'],
     ['id' => 2, 'contenido' => 'Recuerda actualizar la información de recursos humanos de tu clinica pueden estar desactualizados', 'estado' => 'inactivo'],
     ['id' => 3, 'contenido' => 'Se ha detectado un problema en el módulo 2.', 'estado' => 'activo']
-];
+];*/
 
 $modulos = [
     [   
@@ -48,6 +48,8 @@ $modulos = [
     
     
 ];
+
+//dd(session()-> all());
 
 ?>
 
