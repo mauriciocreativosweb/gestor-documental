@@ -16,7 +16,7 @@ $modulosseleccionar = [
     ['id' => 8, 'nombre' => 'establecimiento e infraetructura', 'estado' => 1, 'porcentajecompletado'=> 40, 'tipologia' => 'Clinica estetica', 'color' => '#ffca55', 'icono' => 'img/moduloicono8.png'],
     ['id' => 9, 'nombre' => 'Tratamiento de medicamentos', 'estado' => 0, 'porcentajecompletado'=> 60, 'tipologia' => 'Spa', 'color' => '#7a8ffa', 'icono' => 'img/moduloicono3.png'],
    
-];
+]; 
 
 $informaciondeltipotipoempresa = [
     'id'                      => 1,
