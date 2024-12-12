@@ -58,6 +58,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(UserEmailCode::class);
     }
 
+    public function company() : HasOne{
+        return $this->hasOne(Company::class);
+    }
+
     public function generateCode(){
         try{
             $code = rand(100000, 999999);
