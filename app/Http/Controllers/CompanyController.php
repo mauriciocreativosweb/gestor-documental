@@ -77,7 +77,9 @@ class CompanyController extends Controller
      */
     public function update(CompanyRequest $companyRequest, $id)
     {
+        
         try{
+            dd('entro controller compani.update');
             $dataCompany = $companyRequest->except(['_method','token']);
             $company = Company::findOrFail($id) ;
             $company->update($dataCompany);
