@@ -1,10 +1,15 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\CompanyController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\TwoFAController;
 use App\Http\Middleware\Check2fa;
+use App\Http\Controllers\DepartmentsController;
+use App\Http\Controllers\SectorController;
+use App\Http\Controllers\TypePersonController;
+use App\Http\Controllers\TypologiesController;
 
 Route::get('/', function () {
     return view('home');
@@ -48,5 +53,3 @@ Route::get('/admin', function(){
     return view('auth.admin');
 })->middleware(['auth'])->name('admin');
 
-
-?>
