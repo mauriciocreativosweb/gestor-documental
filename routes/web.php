@@ -10,6 +10,7 @@ use App\Http\Controllers\DepartmentsController;
 use App\Http\Controllers\SectorController;
 use App\Http\Controllers\TypePersonController;
 use App\Http\Controllers\TypologiesController;
+use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
     return view('home');
@@ -41,8 +42,11 @@ Route::controller(TwoFAController::class)->group(function(){
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 
-Route::get('/user', function(){
-    return view('auth.user');
+Route::get('/user/{id}', function($id){
+   $Company = DB::table('companies')
+   ->where('userId',$id)
+   ->first();
+   return view('auth.user', ['Company' => $Company]);
 })->middleware(['auth'])->name('user');
 
 Route::get('/review', function(){

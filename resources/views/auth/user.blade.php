@@ -223,88 +223,92 @@ $modulos = [
             <div style="width:100%; height:100%;overflow-y: auto; overflow-x: hidden; padding:3%; padding-top:0; padding-bottom:0;">
                 <p style="margin:0; padding:0; color:#47A1A8; font-size:1.3vw; font-weight:700;">Informacion del usuario</p>
                 <p style="font-size:.7vw;  padding:0;">Por favor, completa estos datos para que los revisores tengan toda la información necesaria y puedan verificar correctamente la documentación de tu empresa.</p>
-
-                <div style="margin-bottom: 16px; position: relative;">
-                    <input type="text" name="empresa" placeholder="Nombre de la empresa o razón social" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
-                    <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                        <img src="https://img.icons8.com/material-outlined/24/cccccc/building.png" alt="Company Icon">
-                    </span>
-                </div>
-
-                <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
-                    <div style="margin-bottom: 16px; position: relative; width:49%;">
-                        <input type="number" name="identificacion" placeholder="Nit" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                <form method="post" action="{{route('compañias.update', $Company->id)}}">
+                    @csrf
+                    @method("PUT")
+                    <div style="margin-bottom: 16px; position: relative;">
+                        <input type="text" name="empresa" value = "{{isset($Company->nameCompany) ? $Company->nameCompany : '' }}" placeholder="Nombre de la empresa o razón social" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
                         <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                            <img src="https://img.icons8.com/material-outlined/24/cccccc/identification-documents.png" alt="Identification Icon">
+                            <img src="https://img.icons8.com/material-outlined/24/cccccc/building.png" alt="Company Icon">
                         </span>
                     </div>
-                    <div style="margin-bottom: 16px; position: relative; width:49%;">
-                        <input type="number" name="empleados" placeholder="No. Empleados" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+
+                    <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
+                        <div style="margin-bottom: 16px; position: relative; width:49%;">
+                            <input type="number" name="identificacion" value="{{isset($Company->nit) ? $Company->nit : ''}}" placeholder="Nit" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                            <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
+                                <img src="https://img.icons8.com/material-outlined/24/cccccc/identification-documents.png" alt="Identification Icon">
+                            </span>
+                        </div>
+                        <div style="margin-bottom: 16px; position: relative; width:49%;">
+                            <input type="number" name="empleados" value="{{isset($Company->numberEmployees) ? $Company->numberEmployees : ''}}" placeholder="No. Empleados" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                            <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
+                                <img src="https://img.icons8.com/material-outlined/24/cccccc/user.png" alt="User Icon">
+                            </span>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 16px; position: relative;">
+                        <select name="empresa_tipo" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333; appearance: none;">
+                            <option value="" disabled selected>Tipo de empresa</option>
+                            <option value="estetica">Estética</option>
+                            <option value="centro_belleza">Centro de belleza</option>
+                            <option value="clinica">Clínica estética</option>
+                            <option value="clinica">Spa</option>
+                        </select>
                         <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                            <img src="https://img.icons8.com/material-outlined/24/cccccc/user.png" alt="User Icon">
+                            <img src="https://img.icons8.com/material-outlined/24/cccccc/stethoscope.png" alt="Company Type Icon">
                         </span>
                     </div>
-                </div>
 
-                <div style="margin-bottom: 16px; position: relative;">
-                    <select name="empresa_tipo" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333; appearance: none;">
-                        <option value="" disabled selected>Tipo de empresa</option>
-                        <option value="estetica">Estética</option>
-                        <option value="centro_belleza">Centro de belleza</option>
-                        <option value="clinica">Clínica estética</option>
-                        <option value="clinica">Spa</option>
-                    </select>
-                    <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                        <img src="https://img.icons8.com/material-outlined/24/cccccc/stethoscope.png" alt="Company Type Icon">
-                    </span>
-                </div>
-
-                <div style="margin-bottom: 16px; position: relative;">
-                    <input type="text" name="location" placeholder="Dirección de la sede principal" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
-                    <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                        <img src="https://img.icons8.com/material-outlined/24/cccccc/marker.png" alt="Location Icon">
-                    </span>
-                </div>
-
-                <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
-                    <div style="margin-bottom: 16px; position: relative; width:49%;">
-                        <input type="number" name="Teléfono" placeholder="Teléfono" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                    <div style="margin-bottom: 16px; position: relative;">
+                        <input type="text" name="location" value="{{isset($Company->address) ? $Company->address : '' }}" placeholder="Dirección de la sede principal" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
                         <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                            <img src="https://img.icons8.com/material-outlined/24/cccccc/phone.png" alt="Phone Icon">
+                            <img src="https://img.icons8.com/material-outlined/24/cccccc/marker.png" alt="Location Icon">
                         </span>
                     </div>
-                    <div style="margin-bottom: 16px; position: relative; width:49%;">
-                        <input type="text" name="WhatsApp" placeholder="WhatsApp" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+
+                    <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
+                        <div style="margin-bottom: 16px; position: relative; width:49%;">
+                            <input type="number" name="Teléfono" value="{{isset($Company->cellphone) ? $Company->cellphone : ''}}" placeholder="Teléfono" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                            <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
+                                <img src="https://img.icons8.com/material-outlined/24/cccccc/phone.png" alt="Phone Icon">
+                            </span>
+                        </div>
+                        <div style="margin-bottom: 16px; position: relative; width:49%;">
+                            <input type="text" name="WhatsApp" value="{{isset($Company->whatsapp) ? $Company->whatsapp : ''}}" placeholder="WhatsApp" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                            <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
+                                <img src="https://img.icons8.com/material-outlined/24/cccccc/whatsapp.png" alt="WhatsApp Icon">
+                            </span>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 16px; position: relative;">
+                        <input type="text" name="representante" value="{{isset($Company->legalRepresentative) ? $Company->legalRepresentative : '' }}" placeholder="Representante legal" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
                         <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                            <img src="https://img.icons8.com/material-outlined/24/cccccc/whatsapp.png" alt="WhatsApp Icon">
+                            <img src="https://img.icons8.com/material-outlined/24/cccccc/businessman.png" alt="Representative Icon">
                         </span>
                     </div>
-                </div>
 
-                <div style="margin-bottom: 16px; position: relative;">
-                    <input type="text" name="representante" placeholder="Representante legal" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
-                    <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                        <img src="https://img.icons8.com/material-outlined/24/cccccc/businessman.png" alt="Representative Icon">
-                    </span>
-                </div>
-
-                <div style="margin-bottom: 16px; position: relative;">
-                    <input type="text" name="web" placeholder="Sitio web" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
-                    <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                        <img src="https://img.icons8.com/material-outlined/24/cccccc/internet.png" alt="Website Icon">
-                    </span>
-                </div>
-
-                <div style="margin-bottom: 10px; position: relative;">
-                    <textarea name="descripcion" placeholder="Descripcion de la empresa" rows="3" style="width: 100%; padding: 6px 6px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333; resize: none;"></textarea>
-                </div>
-
-                <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
-                    <div style="margin-bottom: 16px; position: relative; width:50%;"> </div>
-                    <div style="margin-bottom: 16px; position: relative; width:50%;">
-                        <button onclick="informaciongeneral()" style="background-color:#47A1A8; color:#ffffff; border-radius:10px; border:none; width:100%;height:35px;font-weight:600;">Guardar</button>
+                    <div style="margin-bottom: 16px; position: relative;">
+                        <input type="text" name="web" value="{{isset($Company->webSite) ? $Company->webSite : '' }}" placeholder="Sitio web" style="width: 100%; padding: 6px 40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                        <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
+                            <img src="https://img.icons8.com/material-outlined/24/cccccc/internet.png" alt="Website Icon">
+                        </span>
                     </div>
-                </div>
+                    
+                    <div style="margin-bottom: 10px; position: relative;">
+                        <textarea name="descripcion" placeholder="Descripcion de la empresa" rows="3" style="width: 100%; padding: 6px 6px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333; resize: none;"></textarea>
+                    </div>
+                
+                    <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
+                        <div style="margin-bottom: 16px; position: relative; width:50%;"> </div>
+                        <div style="margin-bottom: 16px; position: relative; width:50%;">
+                       <!-- <button onclick="informaciongeneral()" style="background-color:#47A1A8; color:#ffffff; border-radius:10px; border:none; width:100%;height:35px;font-weight:600;">Guardar</button>-->
+                        <button onclick="submit()" style="background-color:#47A1A8; color:#ffffff; border-radius:10px; border:none; width:100%;height:35px;font-weight:600;">Guardar</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
 
@@ -612,12 +616,6 @@ $modulos = [
                 }
             }
             
-
-
-            
-
-
-
     </script>
 
 
