@@ -45,8 +45,8 @@ class AppServiceProvider extends ServiceProvider
             $company['typePerson_foreigner'] = 1;
             $company['sector_foreigner'] = 1;
             $company['department_foreigner'] = 1;
-            $company['review_foreigner'] = 1;
-            $company['percent'] = 0.0;
+            $company['percent'] = 0;
+            $company['state'] = 1;
             $company->save();
 
             return (new MailMessage)->view('Mail.Auth2FEmailVerify',['url' => $url]);

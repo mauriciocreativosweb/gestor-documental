@@ -16,14 +16,15 @@ class TwoFAController extends Controller
     }
 
     public function store(Request $request){
+       
         $request->validate([
             'code' => 'required'
         ]);
+        
         $find = UserEmailCode::where('user_id', Auth::id())
                                     ->where('code', $request->code)
                                     ->where('updated_at', '>=', now()->subMinutes(1))
                                     ->first();
-
         if(!is_null($find)){
             $user = User::where('id',Auth::id())->first();
             if($user->hasRole('admin')){
@@ -31,8 +32,7 @@ class TwoFAController extends Controller
             }if($user->hasRole('review')){
                     return redirect('review');
             }else{
-                $user = User::find(Auth::id());
-                return redirect()->route('user',['id' =>$user->id]);
+                return redirect()->route('user');
             }
         }
              

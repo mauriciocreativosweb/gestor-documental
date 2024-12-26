@@ -41,8 +41,6 @@ $usuariocomunicado = [
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Usuarios</title>
-    {!! RecaptchaV3::initJs() !!}
-    @vite(['resources/css/app.css', 'resources/css/home.css', 'resources/js/app.js'])
     <style>
         #slideDiv { width: 500px; height: 100vh; background-color: #ffffff; position: fixed; top: 0; right: -600px; border-radius: 14px 0 0 14px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); transition: right 0.5s ease; } 
         #slideDiv.active { right: 0; } @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } } 

@@ -5,9 +5,6 @@
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Habilita.Pro</title>
-    {!! RecaptchaV3::initJs() !!}
-    @vite(['resources/css/app.css', 'resources/css/home.css','resources/js/app.js'])
-
     <style>
         .container { display: flex; width: 100vw; height: 100vh; background-color: #F2F3F6; }
         .sidebar { width: 20%; display: flex; justify-content: center; margin-top:2%; min-width:250px;}
@@ -61,22 +58,22 @@
         <!-- Content Area -->
         <div  class="content" id="ContenedorAdmin">
             <div id="clientes" class="component">
-                @component('components.clientes', ['titulo' => 'Listado de Clientes']) @endcomponent
+                @include('components.clientes', ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments])
             </div>
             <div id="permisos" class="component">
-                @component('components.permisos', ['titulo' => 'Permisos']) @endcomponent
+                @include('components.permisos', ['titulo' => 'Permisos'])
             </div>
             <div id="colaboradores" class="component">
-                @component('components.colaboradores', ['titulo' => 'Listado de Colaboradores']) @endcomponent
+                @include('components.colaboradores', ['titulo' => 'Listado de Colaboradores'])
             </div>
             <div id="normatividad" class="component">
-                @component('components.normatividad', ['titulo' => 'Listado de Modulos de Normatividad']) @endcomponent
+                @include('components.normatividad', ['titulo' => 'Listado de Modulos de Normatividad'])
             </div>
             <div id="facturacion" class="component">
-                @component('components.facturacion', ['titulo' => 'Facturación']) @endcomponent
+                @include('components.facturacion', ['titulo' => 'Facturación'])
             </div>
             <div id="alertas" class="component">
-                @component('components.alertas', ['titulo' => 'Listado de Alertas']) @endcomponent
+                @include('components.alertas', ['titulo' => 'Listado de Alertas'])
             </div>
         </div>
         

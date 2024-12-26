@@ -47,8 +47,7 @@ $datosdelcolaborador = [
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>colaboradors</title>
-    {!! RecaptchaV3::initJs() !!}
-    @vite(['resources/css/app.css', 'resources/css/home.css', 'resources/js/app.js'])
+  
     <style>
         #slideDivc { width: 500px; height: 100vh; background-color: #ffffff; position: fixed; top: 0; right: -600px; border-radius: 14px 0 0 14px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); transition: right 0.5s ease; } 
         #slideDivc.active { right: 0; } @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } } 
@@ -111,14 +110,18 @@ $datosdelcolaborador = [
     </div>
 
     <div id="modalnuevocolaboradorc" style="display:none; position:relative; width:150vw; height:150vh; background-color:rgba(50, 50, 50, 0.8); position:fixed; padding:0; margin:0; z-index: 99999; margin-left:-18.4%; align-items:center; justify-content:center;">
-        <div style="position:relative; Width:50vw;height:50vh;;background-color:#ffffff; margin:0;padding:0;border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
-            <img src="img/logo.svg" alt="logo" style="width:30%;">
-            <p style="width:70%;text-align:center; font-size:.9vw;">No es posible agregar a un nuevo colaborador de forma directa, ya que es necesario que realice su registro. Sin embargo, puedes utilizar este formulario para enviar una invitación por correo electrónico, permitiendo que la persona se una a la comunidad.</p>
-            <input id="" type="text" name="name"placeholder="Nombre" style=" text-align:center;width:50%;height:30px;border-radius:12px;border:2px solid #47A1A8;">
-            <input id="" type="email" placeholder="Email" style=" text-align:center;width:50%;height:30px;margin-top:10px;border-radius:12px;border:2px solid #47A1A8;">
-            <div onclick="enviarinvitacion()" style="background-color:#47A1A8; margin-top:10px; width:200px; height:35px; border-radius:9px; display:flex; align-items:center; justify-content:center; cursor:pointer;"><p style="color:#ffffff; width:100%;height:50%;text-align:center;padding:0;">Enviar invitación</p></div>
-            <p onclick="ocultarmodalsumarcolaborador()" style="color:#47A1A8; cursor:pointer;">Cerrar</p>
-        </div>      
+        <form method="POST" action="/reviewRegister">
+            @csrf
+            <div style="position:relative; Width:50vw;height:50vh;;background-color:#ffffff; margin:0;padding:0;border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center;"> 
+                <img src="img/logo.svg" alt="logo" style="width:30%;">
+                <p style="width:70%;text-align:center; font-size:.9vw;">No es posible agregar a un nuevo colaborador de forma directa, ya que es necesario que realice su registro. Sin embargo, puedes utilizar este formulario para enviar una invitación por correo electrónico, permitiendo que la persona se una a la comunidad.</p>
+                <input required type="text" name="name" placeholder="Nombre" style=" text-align:center;width:50%;height:30px;border-radius:12px;border:2px solid #47A1A8;">
+                <input required type="email" name="email" placeholder="Email" style=" text-align:center;width:50%;height:30px;margin-top:10px;border-radius:12px;border:2px solid #47A1A8;">
+                <input required type="password" name="password" placeholder="Contraseña" style=" text-align:center;width:50%;height:30px;margin-top:10px;border-radius:12px;border:2px solid #47A1A8;">
+                <button type="submit" style="background-color:#47A1A8; margin-top:10px; width:200px; height:35px; border-radius:9px; border: none; display:flex; align-items:center; justify-content:center; cursor:pointer;"><p style="color:#ffffff; width:100%;height:50%;text-align:center;padding:0;">Enviar invitación</p></button>   
+                <p onclick="ocultarmodalsumarcolaborador()" style="color:#47A1A8; cursor:pointer;">Cerrar</p>
+            </div> 
+        </form>     
     </div>
     <div id="modaleliminarcolaboradorc" style="display:none; position:relative; width:150vw; height:150vh; background-color:rgba(50, 50, 50, 0.8); position:fixed; padding:0; margin:0; z-index: 99999; margin-left:-18.4%; align-items:center; justify-content:center;">
         <div style="position:relative; Width:50vw;height:50vh;;background-color:#ffffff; margin:0;padding:0;border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
@@ -255,11 +258,10 @@ $datosdelcolaborador = [
             </div>
         </div>
 
-
+    
     <script>
 
-
-        var colaboradors = <?php echo json_encode($colaborador); ?>;
+        //var colaboradors = <?php echo json_encode($colaborador); ?>;
         var colaboradoraeliminar = "";
 
         function filtrarempresacs() {
@@ -382,7 +384,7 @@ $datosdelcolaborador = [
             }
         }
         window.onload = function() {
-            cambiarestadocIconoc();
+           cambiarestadocIconoc();
         }
 
          
@@ -439,13 +441,6 @@ $datosdelcolaborador = [
                 }
             });
         }
-
-
-
-        
-
-        
-        
 
     </script>
 </body>

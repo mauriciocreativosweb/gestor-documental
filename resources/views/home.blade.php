@@ -11,7 +11,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     
     <!-- Favicon -->
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/x-icon" href="{{asset('favicon.ico')}}" >
+
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -24,10 +25,8 @@
     @vite(['resources/css/app.css', 'resources/css/home.css','resources/js/app.js'])
 </head>
 <body style="width: 100vw; height: 100vh; margin: 0; padding: 0; background-color: #F2F3F6; display: flex; align-items: center; justify-content: center;">
-
     <!-- Container -->
     <div class="containerHome" style="width: 95vw; height: 90vh; display: flex; flex-direction: row; background-color: #ffffff; border-radius: 15px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);">
-        
         <!-- Login Section -->
         <div id="logindiv" style="width: 25%; height: 50%; margin-left: 3%; display: flex; justify-content: center; flex-direction: column;">
             <x-login></x-login>
