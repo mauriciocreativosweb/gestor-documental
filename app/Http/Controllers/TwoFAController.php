@@ -31,7 +31,8 @@ class TwoFAController extends Controller
             }if($user->hasRole('review')){
                     return redirect('review');
             }else{
-                return redirect('user');
+                $user = User::find(Auth::id());
+                return redirect()->route('user',['id' =>$user->id]);
             }
         }
              
