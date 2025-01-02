@@ -8,7 +8,6 @@ $asesores = [
 
 ?>
 
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,8 +24,9 @@ $asesores = [
         #slideDivcdclientes.active { right: 0; } @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } } 
     </style>
 </head>
-<body style="overflow:hidden;">   
-    <div style="width:100%; height:100%; box-sizing: border-box; padding-left:3%;">
+<body style="overflow:hidden;">
+
+<div style="width:100%; height:100%; box-sizing: border-box; padding-left:3%;">
         <h1 style="color:#47A1A8;">Lista de Usuarios</h1>
         <p style="font-size:1vw;">En esta sección puedes gestionar cada uno de los usuarios de la plataforma, sus datos, estados y permisos.</p>
         <div style="width:96%; aspect-ratio:35/1; display:flex; flex-direction:row; justify-content: space-between;">
@@ -42,10 +42,10 @@ $asesores = [
                 <option value="Inactivos">Inactivos</option>
             </select>
 
-            <div onclick="descargarCSV()" style="cursor:pointer; width:13%; height:100%; background-color:#ffffff; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
+            <div onclick="descargarCSVclientes()" style="cursor:pointer; width:13%; height:100%; background-color:#ffffff; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
                 <p style="color:#47A1A8; font-size:.9vw;">Exportar</p>
             </div>
-            <div onclick="mostrarmodalsumarusuario()" style="cursor:pointer; width:13%; height:100%; background-color:#47A1A8; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
+            <div onclick="mostrarmodalsumarusuarios()" style="cursor:pointer; width:13%; height:100%; background-color:#47A1A8; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
                 <p style="color:#ffffff; font-size:.9vw;">+ Nuevo usuario</p>
             </div>
         </div>
@@ -60,7 +60,7 @@ $asesores = [
                     <p style="width:20%; font-size:.9vw; margin-left:1%; text-align:center; color:#47A1A8; font-weight:600;">{{$Typologies[$Company['typology_foreigner']-1]['typologyName']}}</p>
                     
                     <label class="switch" style="position: relative; display: inline-block; height: 60%; aspect-ratio:1.8/1;">
-                        <form id="updateDataCustomerState">
+                        <form id="updateDataCustomerState{{$Company['id']}}">
                             @csrf
                             @method('PUT')
                             <input type="hidden" name="id" id="idUpdateState" value="{{$Company['id']}}">
@@ -81,6 +81,7 @@ $asesores = [
                             <input type="hidden" name="department_foreigner" value="{{$Company['department_foreigner']}}">
                             <input type="hidden" name="percent" value="{{$Company['percent']}}">
                             <input type="hidden" name="state" value="{{$Company['state']}}">
+
                             <input type="checkbox" id="switch{{$Company['id']}}" onchange="toggleSwitchclientes({{$Company['id']}})" style="opacity: 0; width: 0;"  @if($Company['state'] == 1) checked @endif >
                             <span class="slideres {{$Company['state'] == 1 ? 'on' : 'off'}}" style="display:flex; align-items:center; position: absolute; cursor: pointer; top: 10%; left: 10%; right: 0; bottom: 0; transition: 0.4s; border-radius:100vw;">
                                 <span style="position: absolute; content: ''; height: 75%; aspect-ratio:1/1; border-radius: 50%; left: 8%; background-color: white; transition: 0.4s;"></span>
@@ -101,7 +102,7 @@ $asesores = [
                                     </span>
                                 </div>
                                 <div style="margin-bottom: 10px; position: relative;">
-                                    <textarea name="descriptionEmail" placeholder="Escribe aqui el mensaje que deseas enviar a este usuario" rows="3" style="height:70vh; width: 98%; padding: 6px 6px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 1vw; background-color: #FAFBFE; color: #333; resize: none;"></textarea>
+                                    <textarea name="descriptionEmail" placeholder="Escribe aqui el mensaje que deseas enviar a este usuario" rows="3" style="height:70vh; width: 98%; padding: 4%; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 1vw; background-color: #FAFBFE; color: #333; resize: none;"></textarea>
                                 </div>
                                 <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
                                     <div style="margin-bottom: 16px; position: relative; width:50%; "> 
@@ -113,26 +114,27 @@ $asesores = [
                                 </div>
                             </div>
                         </form>
+
                         <img onclick="eliminarusuario({{$Company['id']}})" style=" height:50%; margin-right:8%; cursor:pointer;" src="https://img.icons8.com/material-outlined/24/47A1A8/delete.png" alt="Delete Icon">
-                        <div id="modaleliminarusuario" style="display:none; position:relative; width:150vw; height:150vh; background-color:rgba(50, 50, 50, 0.8); position:fixed; padding:0; margin:0; z-index: 99999; margin-left:-18.4%; align-items:center; justify-content:center;">
-                            <div style="position:relative; Width:50vw;height:50vh;;background-color:#ffffff; margin:0;padding:0;border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
-                                <form id="deleteCustomerForAdmin">
-                                    @csrf
-                                    <img src="img/logo.svg" alt="logo" style="width:30%;">
-                                    <p style="width:50%;text-align:center; font-size:.9vw;">Para eliminar de manera <b>permanente</b> este usuario por favor escriba <b>la palabra "eliminar"</b></p>
-                                    <input id="palabraeliminar" type="nombre" placeholder="Escriba la palabra eliminar" style=" text-align:center;width:50%;height:30px;border-radius:12px;border:2px solid #47A1A8;">
-                                    <div onclick="confirmareliminarusuario({{$Company['id']}})" style="background-color:#47A1A8; margin-top:10px; width:200px; height:35px; border-radius:9px; display:flex; align-items:center; justify-content:center; cursor:pointer;"><p style="color:#ffffff; width:100%;height:50%;text-align:center;padding:0;">Eliminar</p></div>
-                                    <p onclick="cerrareliminarusuario()" style="color:#47A1A8; cursor:pointer;">Cerrar</p>
-                                </form>
-                            </div> 
-                        </div>      
+                            <div id="modaleliminarusuario" style="display:none; position:relative; width:100vw; height:100vh; top:0; left:0; background-color:rgba(50, 50, 50, 0.8); position:fixed; padding:0; margin:0; z-index: 99999; align-items:center; justify-content:center;">
+                                <div style="position:relative; Width:50vw;height:50vh;;background-color:#ffffff; margin:0;padding:0;border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                                    <form id="deleteCustomerForAdmin" style="display:flex; flex-direction:column; justify-content:center; align-items:center;">
+                                        @csrf
+                                        <img src="img/logo.svg" alt="logo" style="width:30%;">
+                                        <p style="width:50%;text-align:center; font-size:.9vw;">Para eliminar de manera <b>permanente</b> este usuario por favor escriba <b>la palabra "eliminar"</b></p>
+                                        <input id="palabraeliminar" type="nombre" placeholder="Escriba la palabra eliminar" style=" text-align:center;width:50%;height:30px;border-radius:12px;border:2px solid #47A1A8;">
+                                        <div onclick="confirmareliminarusuario({{$Company['id']}})" style="background-color:#47A1A8; margin-top:10px; width:200px; height:35px; border-radius:9px; display:flex; align-items:center; justify-content:center; cursor:pointer;"><p style="color:#ffffff; width:100%;height:50%;text-align:center;padding:0;">Eliminar</p></div>
+                                        <p onclick="cerrareliminarusuario()" style="color:#47A1A8; cursor:pointer;">Cerrar</p>
+                                    </form>
+                                </div> 
+                            </div>      
                         <img  onclick="editarusuario({{$Company['id']}})" style="height:50%; margin-right:8%; cursor:pointer;" src="https://img.icons8.com/material-outlined/24/47A1A8/edit.png" alt="Edit Icon">
                     </div>  
                 </div>
             @endforeach 
         </div>
-     <!--slide-->
     </div> 
+
     @foreach ($Companies as $Company)
         <div id="{{'slideDiv'.$Company['id']}}" class="slideDiv" style="padding:2%; box-sizing: border-box;">
             <div style="height:100%; overflow-y: auto; overflow-x: hidden; padding:3%; padding-top:0; padding-bottom:0;">
@@ -251,18 +253,19 @@ $asesores = [
                 </form>
             </div>
         </div> 
-    @endforeach         
-    <div id="modalnuevousuario" style="display:none; position:relative; width:150vw; height:150vh; background-color:rgba(50, 50, 50, 0.8); position:fixed; padding:0; margin:0; z-index: 99999; margin-left:-18.4%; align-items:center; justify-content:center;">
+    @endforeach    
+    
+    <div id="modalnuevousuarioclientes" style="z-index:9999999; display:none; position:relative; width:150vw; height:150vh; background-color:rgba(50, 50, 50, 0.8); position:fixed; padding:0; margin:0; z-index: 99999; margin-left:-18.4%; align-items:center; justify-content:center;">
         <div style="position:relative; Width:50vw;height:50vh;;background-color:#ffffff; margin:0;padding:0;border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
             <img src="img/logo.svg" alt="logo" style="width:30%;">
-            <p style="width:70%;text-align:center; font-size:.9vw;">No es posible agregar a un nuevo usuario de forma directa, ya que es necesario que realice su registro. Sin embargo, puedes utilizar este formulario para enviar una invitación por correo electrónico, permitiendo que la persona se una a la comunidad.</p>
-            <input id="nombreinvitacion" type="text" autocomplete="off" name="name"placeholder="Nombre" style=" text-align:center;width:50%;height:30px;border-radius:12px;border:2px solid #47A1A8;">
+            <p style="width:70%;text-align:center; font-size:.9vw;">No es posible agregar a un nuevo usuario de forma directa, ya que es necesario que el usuario realice su registro. Sin embargo, puedes utilizar este formulario para enviar una invitación por correo electrónico, permitiendo que la persona se una a la comunidad.</p>
+            <input id="nombreinvitacion" type="text" autocomplete="off" placeholder="Nombre" style=" text-align:center;width:50%;height:30px;border-radius:12px;border:2px solid #47A1A8;">
             <input id="emailinvitacion" type="email" autocomplete="off" placeholder="Email" style=" text-align:center;width:50%;height:30px;margin-top:10px;border-radius:12px;border:2px solid #47A1A8;">
             <div onclick="enviarinvitacionnuevocliente()" style="background-color:#47A1A8; margin-top:10px; width:200px; height:35px; border-radius:9px; display:flex; align-items:center; justify-content:center; cursor:pointer;"><p style="color:#ffffff; width:100%;height:50%;text-align:center;padding:0;">Enviar invitación</p></div>
-            <p onclick="ocultarmodalsumarusuario()" style="color:#47A1A8; cursor:pointer;">Cerrar</p>
+            <p onclick="ocultarmodalsumarusuarios()" style="color:#47A1A8; cursor:pointer;">Cerrar</p>
         </div>
     </div>
-    </div>  
+
     @if ($errors->any())
         <div>
             <ul>
@@ -272,6 +275,11 @@ $asesores = [
             </ul>
         </div>
     @endif  
+
+
+
+
+
     <script>
         //var usuarios = <?php echo json_encode($Companies); ?>;
         var usuarioaeliminar = "";
@@ -293,84 +301,107 @@ $asesores = [
             });
         }
 
-        function descargarCSV() {
-            const encabezados = ['ID', 'Nombre', 'Estado', 'Porcentaje Completado', 'Tipología'];
-            let contenidoCSV = encabezados.join(',') + '\n'; 
-            usuarios.forEach(usuario => {
+        const empresasclientes = @json($Companies);
+
+        function descargarCSVclientes() {
+
+            const encabezados = [
+                'ID', 'Nombre', 'Estado', 'Porcentaje Completado', 'Tipología', 
+                'NIT', 'Número de Empleados', 'Dirección', 'Celular', 
+                'WhatsApp', 'Representante Legal', 'Sitio Web', 'Tipología Extranjero', 
+                'Descripción de la Empresa', 'Correo de Contacto'
+            ];
+            let contenidoCSV = encabezados.join(',') + '\n';
+
+            empresasclientes.forEach(company => {
                 contenidoCSV += [
-                    usuario.id,
-                    usuario.nombre,
-                    usuario.estado === 1 ? 'Activo' : 'Inactivo',
-                    usuario.porcentajecompletado + '%',
-                    usuario.tipologia
+                    company.id,
+                    company.nameCompany,
+                    company.state === 1 ? 'Activo' : 'Inactivo',
+                    company.percent + '%',
+                    company.tipologia,
+                    company.nit,
+                    company.numberEmployees,
+                    company.address,
+                    company.cellphone,
+                    company.whatsapp,
+                    company.legalRepresentative,
+                    company.webSite,
+                    company.typology_foreigner,
+                    company.companyDescription,
+                    company.contactEmail,
                 ].join(',') + '\n';
             });
-            const blob = new Blob([ "\ufeff" + contenidoCSV ], { type: 'text/csv; charset=utf-8' });
+
+            const blob = new Blob(["\ufeff" + contenidoCSV], { type: 'text/csv; charset=utf-8' });
             const enlace = document.createElement('a');
             enlace.href = URL.createObjectURL(blob);
-            enlace.download = 'usuarios.csv';
+            enlace.download = 'companies.csv';
             enlace.click();
         }
-        function mostrarmodalsumarusuario(){
-            document.getElementById('modalnuevousuario').style.display = "flex";
+
+
+
+        function mostrarmodalsumarusuarios(){
+            document.getElementById('modalnuevousuarioclientes').style.display = "flex";
         }
-        function ocultarmodalsumarusuario(){
-            document.getElementById('modalnuevousuario').style.display = "none";
+        function ocultarmodalsumarusuarios(){
+            document.getElementById('modalnuevousuarioclientes').style.display = "none";
         }
 
 
-async function eliminarusuario(id){
+        async function eliminarusuario(id){
 
-    document.getElementById('modaleliminarusuario').style.display = "flex";          
-}
+            document.getElementById('modaleliminarusuario').style.display = "flex";          
+        }
 
-async function confirmareliminarusuario(id){
-    let palabraeliminar = document.getElementById('palabraeliminar').value;
-    if(palabraeliminar === 'eliminar'){
-        try{
-            const token = sessionStorage.getItem('token_bearer');
-            const url = `/compañias/${id}`;
-            let form = document.getElementById('deleteCustomerForAdmin');
-            let formData =  new FormData(form);
-            const data = Object.fromEntries(formData.entries());
-            const response = await fetch(url, {
-                method : 'DELETE',
-                headers : {
-                    'Content-Type' : 'application/json',
-                    'Authorization' : `Bearer ${token}`
-                },
-                body : JSON.stringify(data)
-                });
-            if(response.ok){
-                alert('se elimino');
-                location.reload();
+        async function confirmareliminarusuario(id){
+            let palabraeliminar = document.getElementById('palabraeliminar').value;
+            if(palabraeliminar === 'eliminar'){
+                try{
+                    const token = sessionStorage.getItem('token_bearer');
+                    const url = `/compañias/${id}`;
+                    let form = document.getElementById('deleteCustomerForAdmin');
+                    let formData =  new FormData(form);
+                    const data = Object.fromEntries(formData.entries());
+                    const response = await fetch(url, {
+                        method : 'DELETE',
+                        headers : {
+                            'Content-Type' : 'application/json',
+                            'Authorization' : `Bearer ${token}`
+                        },
+                        body : JSON.stringify(data)
+                        });
+                    if(response.ok){
+                        alert('Usuario Eliminado');
+                        location.reload();
+                    }else{
+                        alert('no se eleimino');
+                    }
+                }catch(err){
+                    alert('El error es: ' + err);
+                }
+
+                /*
+                document.getElementById('modaleliminarusuario').style.display = "none";
+                const empresaDiv = document.getElementById('empresa' + usuarioaeliminar);
+                if (empresaDiv) {
+                    empresaDiv.style.display = 'none';
+                }
+                //alert('USUARIO ELIMINADO');
+                */
+                    
             }else{
-                alert('no se eleimino');
+                alert('La palabra '+palabraeliminar+' no coincide');
             }
-        }catch(err){
-            alert('El error es: ' + err);
         }
-
-        /*
-        document.getElementById('modaleliminarusuario').style.display = "none";
-        const empresaDiv = document.getElementById('empresa' + usuarioaeliminar);
-        if (empresaDiv) {
-            empresaDiv.style.display = 'none';
-        }
-        //alert('USUARIO ELIMINADO');
-        */
-            
-    }else{
-        alert('La palabra '+palabraeliminar+' no coincide');
-    }
-}
         
         function enviarinvitacionnuevocliente(){
             let nombre = document.getElementById('nombreinvitacion').value;
             let email = document.getElementById('emailinvitacion').value;
             if(nombre && email){
-                ocultarmodalsumarusuario()
-                //alert('Enviando invitacion a '+nombre+' al correo electronico '+email);
+                alert('Enviando invitacion a '+nombre+' al correo electronico '+email);
+                ocultarmodalsumarusuarios()
             }else{
                 alert('Los campos no pueden estar vacios');
             }
@@ -455,47 +486,50 @@ async function confirmareliminarusuario(id){
         }
 
 
-async function toggleSwitchclientes(userId){
-    let form = document.getElementById('updateDataCustomerState');
-    let formData =  new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-    if(data.state == 1){
-        data.state = 0
-    }else{
-        data.state = 1
-    }
-    const token = sessionStorage.getItem('token_bearer');
-    try{
-        const url = `/compañias/${userId}`;
-        const response = await fetch(url, {
-            method : 'POST',
-            headers : {
-                'Content-Type' : 'application/json',
-                'Authorization' : `Bearer ${token}`
-            },
-            body : JSON.stringify(data)
-        });
-        if(response.ok){
-           // alert('se actualizo el estado');
-            let checkbox = document.getElementById('switch' + userId);
-            let estado = checkbox.checked ? 1 : 0; 
-            let slider = document.querySelector('#switch' + userId + ' + .slideres');
-            let circle = slider.querySelector('span');
-            if (estado === 1) {
-                slider.style.backgroundColor = '#47A1A8';
-                circle.style.transform = 'translateX(100%)';
-            } else {
-                slider.style.backgroundColor = '#FD7377'; 
-                circle.style.transform = 'translateX(0px)';
+        async function toggleSwitchclientes(userId){
+            let form = document.getElementById('updateDataCustomerState'+userId);
+            let formData =  new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+            if(data.state == 1){
+                data.state = 0
+            }else{
+                data.state = 1
             }
-            location.reload();
-        }else{
-           // alert('no se pudo actualizar el estado');
+            const token = sessionStorage.getItem('token_bearer');
+            try{
+                const url = `/compañias/${userId}`;
+                const response = await fetch(url, {
+                    method : 'POST',
+                    headers : {
+                        'Content-Type' : 'application/json',
+                        'Authorization' : `Bearer ${token}`
+                    },
+                    body : JSON.stringify(data)
+                });
+                if(response.ok){
+                // alert('se actualizo el estado');
+                    let checkbox = document.getElementById('switch' + userId);
+                    let estado = checkbox.checked ? 1 : 0; 
+                    let slider = document.querySelector('#switch' + userId + ' + .slideres');
+                    let circle = slider.querySelector('span');
+                    if (estado === 1) {
+                        slider.style.backgroundColor = '#47A1A8';
+                        circle.style.transform = 'translateX(100%)';
+                    } else {
+                        slider.style.backgroundColor = '#FD7377'; 
+                        circle.style.transform = 'translateX(0px)';
+                    }
+                    location.reload();
+                }else{
+                // alert('no se pudo actualizar el estado');
+                }
+            }catch(err){
+                alert('El error es: ' + err);
+            }
         }
-    }catch(err){
-        alert('El error es: ' + err);
-    }
-}
     </script>
+
+
+
 </body>
 </html>

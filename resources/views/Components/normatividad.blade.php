@@ -86,11 +86,11 @@ $informaciondelmmmodulo = [
                 <option value="Inactivos">Inactivos</option>
             </select>
 
-            <div onclick="" style="cursor:pointer; width:13%; height:100%; background-color:#ffffff; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
-                <p style="color:#47A1A8; font-size:.9vw;">Exportar</p>
+            <div onclick="mostrarmodalsumarusuario()" style="cursor:pointer; width:13%; height:100%; background-color:#ffffff; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
+                <p style="color:#47A1A8; font-size:.9vw;">+ Nuevo modulo</p>
             </div>
-            <div onclick="mostrarmodalsumarusuario()" style="cursor:pointer; width:13%; height:100%; background-color:#47A1A8; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
-                <p style="color:#ffffff; font-size:.9vw;">+ Nuevo modulo</p>
+            <div  style="cursor:pointer; width:13%; height:100%; background-color:#47A1A8; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
+                <p style="color:#ffffff; font-size:.9vw;">Guardar todo</p>
             </div>
         </div>
 
@@ -98,23 +98,25 @@ $informaciondelmmmodulo = [
 
         
             <div id="listammmodulo" style="width:50%; height:100%; margin-top:20px; overflow-y: auto; padding:1%; box-sizing:border-box;">
-                <?php foreach ($msdemmodulo as $msdemmoduloss): ?>
-                    <div id="mmodulo<?php echo $msdemmoduloss['id']; ?>" class="mmodulossc" data-estado="<?php echo $msdemmoduloss['estado']; ?>" 
-                        style="width:100%; aspect-ratio:25/1; margin-bottom:.6%; background-color:#F2F3F6; border-radius:.5vw; display:flex; flex-direction:row; align-items:center; cursor:pointer;" 
-                        onclick="seleccionarmmodulo(<?php echo $msdemmoduloss['id']; ?>)">
-                        <p id="nombremmodulo<?php echo $msdemmoduloss['id']; ?>" class="nombremmodulo" style="margin-left:2%; width:80%; font-size:.9vw;"><?php echo $msdemmoduloss['nombre']; ?></p>
-                        <div style="width:10%; height:100%; display:flex; flex-direction:row; justify-content: flex-end; align-items:center;">
-                            <img id="eliminarmmodulo<?php echo $msdemmoduloss['id']; ?>" class="eliminarmmodulo" onclick="eliminarmmmodulo(<?php echo $msdemmoduloss['id']; ?>)" style=" height:80%; margin-right:8%; cursor:pointer;" src="https://img.icons8.com/material-outlined/24/47A1A8/delete.png" alt="Delete Icon">
-                            <img id="editarmmodulo<?php echo $msdemmoduloss['id']; ?>" class="editarmmodulo" onclick="editarmmmodulo(<?php echo $msdemmoduloss['id']; ?>)" style="height:80%; margin-right:8%; cursor:pointer;" src="https://img.icons8.com/material-outlined/24/47A1A8/edit.png" alt="Edit Icon">
+                
+                    <?php foreach ($msdemmodulo as $msdemmoduloss): ?>
+                        <div id="mmodulo<?php echo $msdemmoduloss['id']; ?>" class="mmodulossc" data-estado="<?php echo $msdemmoduloss['estado']; ?>" 
+                            style="width:100%; aspect-ratio:25/1; margin-bottom:.6%; background-color:#F2F3F6; border-radius:.5vw; display:flex; flex-direction:row; align-items:center; cursor:pointer;" 
+                            onclick="seleccionarmmodulo(<?php echo $msdemmoduloss['id']; ?>)">
+                            <p id="nombremmodulo<?php echo $msdemmoduloss['id']; ?>" class="nombremmodulo" style="margin-left:2%; width:80%; font-size:.9vw;"><?php echo $msdemmoduloss['nombre']; ?></p>
+                            <div style="width:10%; height:100%; display:flex; flex-direction:row; justify-content: flex-end; align-items:center;">
+                                <img id="eliminarmmodulo<?php echo $msdemmoduloss['id']; ?>" class="eliminarmmodulo" onclick="eliminarmmmodulo(<?php echo $msdemmoduloss['id']; ?>)" style=" height:80%; margin-right:8%; cursor:pointer;" src="https://img.icons8.com/material-outlined/24/47A1A8/delete.png" alt="Delete Icon">
+                                <img id="editarmmodulo<?php echo $msdemmoduloss['id']; ?>" class="editarmmodulo" onclick="editarmmmodulo(<?php echo $msdemmoduloss['id']; ?>)" style="height:80%; margin-right:8%; cursor:pointer;" src="https://img.icons8.com/material-outlined/24/47A1A8/edit.png" alt="Edit Icon">
+                            </div>
+                            <label class="switchmmmodulo" style="margin-right:2%; position: relative; display: inline-block; height: 100%; aspect-ratio:1.8/1;">
+                                <input type="checkbox" id="switchmmmodulo<?php echo $msdemmoduloss['id']; ?>" onchange="toggleswitchmmmoduloclientes(<?php echo $msdemmoduloss['id']; ?>)" style="opacity: 0; width: 0;" <?php echo ($msdemmoduloss['estado'] == 1) ? 'checked' : ''; ?>>
+                                <span class="slideres <?php echo ($msdemmoduloss['estado'] == 1) ? 'on' : 'off'; ?>" style="display:flex; align-items:center; position: absolute; cursor: pointer; top: 10%; left: 10%; right: 0; bottom: 0; transition: 0.4s; border-radius:100vw;">
+                                    <span style="position: absolute; content: ''; height: 75%; aspect-ratio:1/1; border-radius: 50%; left: 8%; background-color: white; transition: 0.4s;"></span>
+                                </span>
+                            </label>
                         </div>
-                        <label class="switchmmmodulo" style="margin-right:2%; position: relative; display: inline-block; height: 100%; aspect-ratio:1.8/1;">
-                            <input type="checkbox" id="switchmmmodulo<?php echo $msdemmoduloss['id']; ?>" onchange="toggleswitchmmmoduloclientes(<?php echo $msdemmoduloss['id']; ?>)" style="opacity: 0; width: 0;" <?php echo ($msdemmoduloss['estado'] == 1) ? 'checked' : ''; ?>>
-                            <span class="slideres <?php echo ($msdemmoduloss['estado'] == 1) ? 'on' : 'off'; ?>" style="display:flex; align-items:center; position: absolute; cursor: pointer; top: 10%; left: 10%; right: 0; bottom: 0; transition: 0.4s; border-radius:100vw;">
-                                <span style="position: absolute; content: ''; height: 75%; aspect-ratio:1/1; border-radius: 50%; left: 8%; background-color: white; transition: 0.4s;"></span>
-                            </span>
-                        </label>
-                    </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                
             </div>
             <div id="listammmodulo" style="border-radius:10px; background-color:#47A1A8; width:50%; height:100%; margin-top:15px; overflow-y: auto; padding:1%; box-sizing:border-box;">
              
@@ -122,40 +124,42 @@ $informaciondelmmmodulo = [
 
             <div class="acordeon-container">
 
-                <div class="acordeon-item" draggable="true">
-                    <div class="acordeon" style="display:flex; flex-direction:row; padding-left:3%; box-sizing:border-box; align-items:center; justify-content: space-between;">
-                        <p class="abriracordion">Titulo del documento numero uno</p>
-                        <div style="margin-right:3%; height:60%; aspect-ratio:1/1; border-radius:8px; background-color:#2085ec; position:relative; cursor:pointer;" onclick="document.getElementById('colorInput').click();">
-                            <input id="colorInput" type="color" style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" onchange="this.parentElement.style.backgroundColor=this.value">
-                        </div>
-                    </div>
-                    <div class="panel">
-                        <p>Contenido de la sección 1</p>
-                    </div>
-                </div>
-                <div class="acordeon-item" draggable="true">
-                    <div class="acordeon" style="display:flex; flex-direction:row; padding-left:3%; box-sizing:border-box; align-items:center; justify-content: space-between;">
-                        <p class="abriracordion">Titulo del documento numero dos</p>
-                        <div style="margin-right:3%; height:60%; aspect-ratio:1/1; border-radius:8px; background-color:#2085ec; position:relative; cursor:pointer;" onclick="document.getElementById('colorInput').click();">
-                            <input id="colorInput" type="color" style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" onchange="this.parentElement.style.backgroundColor=this.value">
-                        </div>
-                    </div>
-                    <div class="panel">
-                        <p>Contenido de la sección 1</p>
-                    </div>
-                </div>
-                <div class="acordeon-item" draggable="true">
-                    <div class="acordeon" style="display:flex; flex-direction:row; padding-left:3%; box-sizing:border-box; align-items:center; justify-content: space-between;">
-                        <p class="abriracordion">Titulo del documento numero tres</p>
-                        <div style="margin-right:3%; height:60%; aspect-ratio:1/1; border-radius:8px; background-color:#2085ec; position:relative; cursor:pointer;" onclick="document.getElementById('colorInput').click();">
-                            <input id="colorInput" type="color" style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" onchange="this.parentElement.style.backgroundColor=this.value">
-                        </div>
-                    </div>
-                    <div class="panel">
-                        <p>Contenido de la sección 1</p>
-                    </div>
-                </div>
+                <div id="listadedocumentos" style="width:100%; height:100%; display:none; flex-direction:column;">
 
+                    <div class="acordeon-item" draggable="true">
+                        <div class="acordeon" style="display:flex; flex-direction:row; padding-left:3%; box-sizing:border-box; align-items:center; justify-content: space-between;">
+                            <p class="abriracordion">Titulo del documento numero uno</p>
+                            <div style="margin-right:3%; height:60%; aspect-ratio:1/1; border-radius:8px; background-color:#2085ec; position:relative; cursor:pointer;" onclick="document.getElementById('colorInput').click();">
+                                <input id="colorInput" type="color" style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" onchange="this.parentElement.style.backgroundColor=this.value">
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <p>Contenido de la sección 1</p>
+                        </div>
+                    </div>
+                    <div class="acordeon-item" draggable="true">
+                        <div class="acordeon" style="display:flex; flex-direction:row; padding-left:3%; box-sizing:border-box; align-items:center; justify-content: space-between;">
+                            <p class="abriracordion">Titulo del documento numero dos</p>
+                            <div style="margin-right:3%; height:60%; aspect-ratio:1/1; border-radius:8px; background-color:#2085ec; position:relative; cursor:pointer;" onclick="document.getElementById('colorInput').click();">
+                                <input id="colorInput" type="color" style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" onchange="this.parentElement.style.backgroundColor=this.value">
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <p>Contenido de la sección 1</p>
+                        </div>
+                    </div>
+                    <div class="acordeon-item" draggable="true">
+                        <div class="acordeon" style="display:flex; flex-direction:row; padding-left:3%; box-sizing:border-box; align-items:center; justify-content: space-between;">
+                            <p class="abriracordion">Titulo del documento numero tres</p>
+                            <div style="margin-right:3%; height:60%; aspect-ratio:1/1; border-radius:8px; background-color:#2085ec; position:relative; cursor:pointer;" onclick="document.getElementById('colorInput').click();">
+                                <input id="colorInput" type="color" style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" onchange="this.parentElement.style.backgroundColor=this.value">
+                            </div>
+                        </div>
+                        <div class="panel">
+                            <p>Contenido de la sección 1</p>
+                        </div>
+                    </div>
+                </div>
 
 
             </div>
@@ -428,6 +432,8 @@ $informaciondelmmmodulo = [
             const nombremmoduloss = document.querySelectorAll('.nombremmodulo');
             const eliminarmmodulo = document.querySelectorAll('.eliminarmmodulo');
             const editarmmodulo = document.querySelectorAll('.editarmmodulo');
+
+            document.getElementById('listadedocumentos').style.display = "flex";
 
             mmoduloss.forEach(emp => {
                 emp.style.backgroundColor = '#F2F3F6';

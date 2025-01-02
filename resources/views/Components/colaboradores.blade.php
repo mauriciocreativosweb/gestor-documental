@@ -1,8 +1,9 @@
 <?php
+
 $colaborador = [
-    ['id' => 1, 'nombre' => 'Nombre de la empresac numero uno', 'estadoc' => 0, 'empresasasignadas'=> 60, 'tipologia' => 'Spa'],
-    ['id' => 2, 'nombre' => 'Nombre de la empresac numero dos', 'estadoc' => 1, 'empresasasignadas'=> 40, 'tipologia' => 'Clinica estetica'],
-    ['id' => 3, 'nombre' => 'Nombre de la empresac numero tres', 'estadoc' => 1, 'empresasasignadas'=> 80, 'tipologia' => 'Clinica dental']
+    ['id' => 1, 'nombre' => 'Asesor numero uno', 'estadoc' => 0, 'empresasasignadas'=> 60, 'tipologia' => 'Spa'],
+    ['id' => 2, 'nombre' => 'Asesor numero dos', 'estadoc' => 1, 'empresasasignadas'=> 40, 'tipologia' => 'Clinica estetica'],
+    ['id' => 3, 'nombre' => 'Asesor numero tres', 'estadoc' => 1, 'empresasasignadas'=> 80, 'tipologia' => 'Clinica dental']
 ];
 
 
@@ -15,26 +16,10 @@ $datosdelcolaborador = [
     'direccion'               => 'Calle Falsa 123, Ciudad',
     'telefono'                => '3102640456',
     'whatsapp'                => '573102640456',
-    'estadoc'                  => 1,
+    'estadoc'                 => 1,
+    'tarjetaprofesional'      => '16856541656',
     'correo_contacto'         => 'contacto@ejemplo.com',
     'fecha_creacion'          => '2022-01-15',
-    'empresas'                => [
-        [
-            'id' => 101,
-            'nombre' => 'Empresa Uno S.A.',
-            'usuario' => 'usuario1'
-        ],
-        [
-            'id' => 102,
-            'nombre' => 'Empresa Dos Ltda.',
-            'usuario' => 'usuario2'
-        ],
-        [
-            'id' => 103,
-            'nombre' => 'Empresa Tres S.A.S.',
-            'usuario' => 'usuario3'
-        ]
-    ]
 ];
 
 
@@ -62,7 +47,7 @@ $datosdelcolaborador = [
 <body style="overflow:hidden;">
     
     <div style="width:100%; height:100%; box-sizing: border-box; padding-left:3%;">
-        <h1 style="color:#47A1A8;">Lista de asesores</h1>
+        <h1 style="color:#47A1A8;">Asignacion de asesores</h1>
         <p style="font-size:1vw;">En esta sección puedes gestionar cada uno de los colaboradors de la plataforma, sus datos, estadocs y permisos.</p>
         
         <div style="width:96%; aspect-ratio:35/1; display:flex; flex-direction:row; justify-content: space-between;">
@@ -72,69 +57,141 @@ $datosdelcolaborador = [
                     <img src="https://img.icons8.com/material-outlined/24/cccccc/search.png" alt="Search Icon">
                 </span>
             </div>
+
             <select id="filtrarporestadocc" style="padding-left:1%; font-size:.9vw; width:22%; height:115%; background-color:#ffffff; border: 2px solid #47A1A8; border-radius:12px;" onchange="filtrarempresacs()">
                 <option value="Todos">Todos</option>
-                <option value="Activos">Activos</option>
-                <option value="Inactivos">Inactivos</option>
+                    <?php foreach ($colaborador as $colaboradors): ?>
+                        <?php if ($colaboradors['estadoc'] === 1): ?>
+                            <option value="<?php echo $colaboradors['nombre']; ?>"><?php echo $colaboradors['nombre']; ?></option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
             </select>
 
-            <div onclick="descargarCSV()" style="cursor:pointer; width:13%; height:100%; background-color:#ffffff; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
-                <p style="color:#47A1A8; font-size:.9vw;">Exportar</p>
+            <div onclick="verlistaempresasdeasesor()" style="cursor:pointer; width:13%; height:100%; background-color:#ffffff; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
+                <p style="color:#47A1A8; font-size:.9vw;">Asesores</p>
             </div>
             <div onclick="mostrarmodalsumarcolaborador()" style="cursor:pointer; width:13%; height:100%; background-color:#47A1A8; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
-                <p style="color:#ffffff; font-size:.9vw;">+ Nuevo colaborador</p>
+                <p style="color:#ffffff; font-size:.9vw;">+ Nuevo Asesor</p>
             </div>
         </div>
 
         <div id="listac" style="width:96%; height:calc(70% + 10px); margin-top:20px; overflow-y: auto;">
-        <?php foreach ($colaborador as $colaboradors): ?>
-            <div id="empresac<?php echo $colaboradors['id']; ?>" class="empresac" data-estadoc="<?php echo $colaboradors['estadoc']; ?>" style="width:100%; aspect-ratio:25/1; margin-bottom:.6%; background-color:#F2F3F6; border-radius:.5vw; display:flex; flex-direction:row; align-items:center;">
-                <p class="nombre-empresac" style="margin-left:2%; width:65%; font-size:.9vw; cursor:pointer;"><?php echo $colaboradors['nombre']; ?></p>
-                <p onclick="verlistaempresasdeasesor()" style="width:20%; cursor:pointer; font-size:.9vw; margin-left:1%; text-align:center; color:#47A1A8; font-weight:600;"><?php echo $colaboradors['empresasasignadas']; ?> empresas</p>
-                <label class="switchc" style="position: relative; display: inline-block; height: 60%; aspect-ratio:1.8/1;">
-                    <input type="checkbox" id="switchc<?php echo $colaboradors['id']; ?>" onchange="toggleswitchcclientes(<?php echo $colaboradors['id']; ?>)" style="opacity: 0; width: 0;" <?php echo ($colaboradors['estadoc'] == 1) ? 'checked' : ''; ?>>
-                    <span class="slideres <?php echo ($colaboradors['estadoc'] == 1) ? 'on' : 'off'; ?>" style="display:flex; align-items:center; position: absolute; cursor: pointer; top: 10%; left: 10%; right: 0; bottom: 0; transition: 0.4s; border-radius:100vw;">
-                        <span style="position: absolute; content: ''; height: 75%; aspect-ratio:1/1; border-radius: 50%; left: 8%; background-color: white; transition: 0.4s;"></span>
-                    </span>
-                </label>
 
-                <div style="width:10%; height:100%; display:flex; flex-direction:row; justify-content: flex-end; align-items:center;">
-                    <img onclick="enviaremailcolaborador(<?php echo $colaboradors['id']; ?>)" style=" height:50%; margin-right:8%; cursor:pointer;" src="https://img.icons8.com/material-outlined/24/47A1A8/mail.png" alt="Delete Icon">
-                    <img onclick="eliminarcolaboradorc(<?php echo $colaboradors['id']; ?>)" style=" height:50%; margin-right:8%; cursor:pointer;" src="https://img.icons8.com/material-outlined/24/47A1A8/delete.png" alt="Delete Icon">
-                    <img onclick="editarcolaborador(<?php echo $colaboradors['id']; ?>)" style="height:50%; margin-right:8%; cursor:pointer;" src="https://img.icons8.com/material-outlined/24/47A1A8/edit.png" alt="Edit Icon">
-                </div>
+            @foreach ($Companies as $Company)
+
+            <div id="empresac" class="empresac" style="width:100%; aspect-ratio:25/1; margin-bottom:.6%; background-color:#F2F3F6; border-radius:.5vw; display:flex; flex-direction:row; align-items:center;">
+                <p class="nombre-empresac" style="margin-left:2%; width:74%; font-size:.9vw; cursor:pointer;">{{$Company['nameCompany']}}</p>
+                <select id="filtrarporestado" style="padding-left:1%; font-size:.9vw; width:22%; height:70%; background-color:#ffffff; border: 2px solid #47A1A8; border-radius:12px;" onchange="filtrarEmpresas()">
+                    <option value="null">Sin asesor</option> 
+                    <?php foreach ($colaborador as $colaboradors): ?>
+                        <?php if ($colaboradors['estadoc'] === 1): ?>
+                            <option value="<?php echo $colaboradors['nombre']; ?>"><?php echo $colaboradors['nombre']; ?></option>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </select>
             </div>
-        <?php endforeach; ?>
+
+            @endforeach 
+        
  
         </div>
+
     </div>
 
+
     <div id="modalnuevocolaboradorc" style="display:none; position:relative; width:150vw; height:150vh; background-color:rgba(50, 50, 50, 0.8); position:fixed; padding:0; margin:0; z-index: 99999; margin-left:-18.4%; align-items:center; justify-content:center;">
-        <form method="POST" action="/reviewRegister">
-            @csrf
-            <div style="position:relative; Width:50vw;height:50vh;;background-color:#ffffff; margin:0;padding:0;border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center;"> 
-                <img src="img/logo.svg" alt="logo" style="width:30%;">
-                <p style="width:70%;text-align:center; font-size:.9vw;">No es posible agregar a un nuevo colaborador de forma directa, ya que es necesario que realice su registro. Sin embargo, puedes utilizar este formulario para enviar una invitación por correo electrónico, permitiendo que la persona se una a la comunidad.</p>
-                <input required type="text" name="name" placeholder="Nombre" style=" text-align:center;width:50%;height:30px;border-radius:12px;border:2px solid #47A1A8;">
-                <input required type="email" name="email" placeholder="Email" style=" text-align:center;width:50%;height:30px;margin-top:10px;border-radius:12px;border:2px solid #47A1A8;">
-                <input required type="password" name="password" placeholder="Contraseña" style=" text-align:center;width:50%;height:30px;margin-top:10px;border-radius:12px;border:2px solid #47A1A8;">
-                <button type="submit" style="background-color:#47A1A8; margin-top:10px; width:200px; height:35px; border-radius:9px; border: none; display:flex; align-items:center; justify-content:center; cursor:pointer;"><p style="color:#ffffff; width:100%;height:50%;text-align:center;padding:0;">Enviar invitación</p></button>   
-                <p onclick="ocultarmodalsumarcolaborador()" style="color:#47A1A8; cursor:pointer;">Cerrar</p>
+       
+            <div style="position:relative; Width:50vw;height:auto;background-color:#ffffff; margin:0;padding:0;border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center;"> 
+
+                <div style="height:80%; padding:3%; padding-top:5%; padding-bottom:5%;">
+                    <p style="margin:0; padding:0; color:#47A1A8; font-size:1.3vw; font-weight:700;">Nuevo Asesor</p>
+                    <p style="font-size:.7vw;  padding:0;">Puedes usar este formulario para añadir un nuevo asesor al equipo de trabajo, por favor completa todos los campos.</p>
+
+                    <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
+                    <div style="margin-bottom: 16px; position: relative; width:49%;">
+                        <input id="cargoasesor" type="text" name="Cargo" placeholder="Cargo" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                            <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
+                                <img src="https://img.icons8.com/material-outlined/24/cccccc/building.png" alt="Company Icon">
+                            </span>
+                        </div>
+                        <div style="margin-bottom: 16px; position: relative; width:49%;">
+                            <input id="emailasesor" type="Email" name="Email" placeholder="Email" style="width: 100%; padding: 6px; padding-left:40px; width:calc(98% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                            <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
+                                <img src="https://img.icons8.com/material-outlined/24/cccccc/mail.png" alt="User Icon">
+                            </span>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 16px; position: relative;">
+                        <input id="nombreasesor" type="text" name="empresac" placeholder="Nombre" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                        <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
+                            <img src="https://img.icons8.com/material-outlined/24/cccccc/user.png" alt="Company Icon">
+                        </span>
+                    </div>
+
+                    <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
+                        <div style="margin-bottom: 16px; position: relative; width:49%;">
+                            <input id="cedulaasesor" type="number" name="identificacion"  placeholder="Cedula" style="width: 100%; padding: 6px; padding-left:40px; width:calc(96% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                            <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
+                                <img src="https://img.icons8.com/material-outlined/24/cccccc/identification-documents.png" alt="Identification Icon">
+                            </span>
+                        </div>
+                        <div style="margin-bottom: 16px; position: relative; width:49%;">
+                            <input id="tarjetaprofesioanlasesor" type="number" name="empleados"  placeholder="Tarjeta profesional" style="width: 100%; padding: 6px; padding-left:40px; width:calc(98% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                            <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
+                                <img src="https://img.icons8.com/?size=24&id=qePzjQLJYgjF&format=png&color=cccccc" alt="User Icon">
+                            </span>
+                        </div>
+                    </div>
+
+
+                    <div style="margin-bottom: 16px; position: relative;">
+                        <input id="direccionasesor" type="text" name="location" placeholder="Dirección" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                        <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
+                            <img src="https://img.icons8.com/material-outlined/24/cccccc/marker.png" alt="Location Icon">
+                        </span>
+                    </div>
+
+                    <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
+                        <div style="margin-bottom: 16px; position: relative; width:49%;">
+                            <input id="telefonoasesor" type="number" name="Teléfono" placeholder="Teléfono" style="width: 100%; padding: 6px; padding-left:40px; width:calc(96% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                            <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
+                                <img src="https://img.icons8.com/material-outlined/24/cccccc/phone.png" alt="Identification Icon">
+                            </span>
+                        </div>
+                        <div style="margin-bottom: 16px; position: relative; width:49%;">
+                            <input id="whatsappasesor" type="number" name="WhatsApp" placeholder="WhatsApp" style="width: 100%; padding: 6px; padding-left:40px; width:calc(98% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                            <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
+                                <img src="https://img.icons8.com/material-outlined/24/cccccc/whatsapp.png" alt="User Icon">
+                            </span>
+                        </div>
+                    </div>
+
+                    <div style="width:100%; display:flex; flex-direction:column;">
+                        <button onclick="guardarnuevoasesor()" style="cursor:pointer; background-color:#47A1A8; color:#ffffff; border-radius:10px; border:none; width:100%;height:35px;font-weight:600;">Guardar</button>
+                        <p onclick="cerrarnuevoasesor()" style="width:100%; text-align:center; color:#47A1A8; cursor:pointer;">Descartar y cerrar</p>
+                    </div>
+
+                </div>
+        
             </div> 
-        </form>     
+           
     </div>
+    
+
+
     <div id="modaleliminarcolaboradorc" style="display:none; position:relative; width:150vw; height:150vh; background-color:rgba(50, 50, 50, 0.8); position:fixed; padding:0; margin:0; z-index: 99999; margin-left:-18.4%; align-items:center; justify-content:center;">
         <div style="position:relative; Width:50vw;height:50vh;;background-color:#ffffff; margin:0;padding:0;border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
             <img src="img/logo.svg" alt="logo" style="width:30%;">
-            <p style="width:50%;text-align:center; font-size:.9vw;">Para eliminar de manera <b>permanente</b> este colaborador por favor escriba <b>la palabra "eliminar"</b></p>
-            <input id="palabraeliminarc" type="nombre" placeholder="Escriba la palabra eliminar" style=" text-align:center;width:50%;height:30px;border-radius:12px;border:2px solid #47A1A8;">
+            <p style="width:80%;text-align:center; font-size:.9vw;">Para eliminar de manera permanente a este colaborador, por favor escriba la palabra "eliminar". Tenga en cuenta que las empresas asignadas a esta persona quedarán sin asesor, y deberá reasignarlas una por una.</b></p>
+            <input id="palabraeliminarc" type="text" placeholder="Escriba la palabra eliminar" style=" text-align:center;width:50%;height:30px;border-radius:12px;border:2px solid #47A1A8;">
             <div onclick="confirmareliminarcolaboradorc()" style="background-color:#47A1A8; margin-top:10px; width:200px; height:35px; border-radius:9px; display:flex; align-items:center; justify-content:center; cursor:pointer;"><p style="color:#ffffff; width:100%;height:50%;text-align:center;padding:0;">Eliminar</p></div>
             <p onclick="cerrareliminarcolaboradorc()" style="color:#47A1A8; cursor:pointer;">Cerrar</p>
         </div> 
     </div>
 
     <!--slide-->
-    <div id="slideDivc" style="padding:2%; box-sizing: border-box;">
+    <div id="slideDivc" style="display:block; z-index:9999999999; padding:2%; box-sizing: border-box;">
 
             <div style="height:100%; overflow-y: auto; overflow-x: hidden; padding:3%; padding-top:0; padding-bottom:0;">
                 <p style="margin:0; padding:0; color:#47A1A8; font-size:1.3vw; font-weight:700;">Informacion del colaborador</p>
@@ -142,7 +199,7 @@ $datosdelcolaborador = [
 
                 <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
                 <div style="margin-bottom: 16px; position: relative; width:49%;">
-                    <input type="text" name="Cargo" value="<?php echo $datosdelcolaborador['cargo']; ?>" placeholder="Cargo" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                    <input id="cargoasesoractualizar" type="text" name="Cargo" value="<?php echo $datosdelcolaborador['cargo']; ?>" placeholder="Cargo" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
                         <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
                             <img src="https://img.icons8.com/material-outlined/24/cccccc/building.png" alt="Company Icon">
                         </span>
@@ -156,7 +213,7 @@ $datosdelcolaborador = [
                 </div>
 
                 <div style="margin-bottom: 16px; position: relative;">
-                    <input type="text" name="empresac" value="<?php echo $datosdelcolaborador['nombre_colaborador']; ?>" placeholder="Nombre de la empresac o razón social" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                    <input id="nombreasesoractualizar" type="text" name="empresac" value="<?php echo $datosdelcolaborador['nombre_colaborador']; ?>" placeholder="Nombre del asesor" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
                     <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
                         <img src="https://img.icons8.com/material-outlined/24/cccccc/building.png" alt="Company Icon">
                     </span>
@@ -164,13 +221,13 @@ $datosdelcolaborador = [
 
                 <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
                     <div style="margin-bottom: 16px; position: relative; width:49%;">
-                        <input type="number" name="identificacion" value="<?php echo $datosdelcolaborador['cedula'];?>" placeholder="cedula" style="width: 100%; padding: 6px; padding-left:40px; width:calc(96% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                        <input id="cedulaasesoractualizar" type="number" name="identificacion" value="<?php echo $datosdelcolaborador['cedula'];?>" placeholder="cedula" style="width: 100%; padding: 6px; padding-left:40px; width:calc(96% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
                         <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
                             <img src="https://img.icons8.com/material-outlined/24/cccccc/identification-documents.png" alt="Identification Icon">
                         </span>
                     </div>
                     <div style="margin-bottom: 16px; position: relative; width:49%;">
-                        <input type="number" name="empleados" value="<?php echo $datosdelcolaborador['numero_empresas'];?>" placeholder="No. Empleados" style="width: 100%; padding: 6px; padding-left:40px; width:calc(98% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                        <input id="cantidadempactualizar" type="number" name="empleados" value="<?php echo $datosdelcolaborador['numero_empresas'];?>" placeholder="Empresas Asignadas" style="width: 100%; padding: 6px; padding-left:40px; width:calc(98% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
                         <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
                             <img src="https://img.icons8.com/material-outlined/24/cccccc/user.png" alt="User Icon">
                         </span>
@@ -179,21 +236,35 @@ $datosdelcolaborador = [
 
 
                 <div style="margin-bottom: 16px; position: relative;">
-                    <input type="text" name="location" value="<?php echo $datosdelcolaborador['direccion'];?>" placeholder="Dirección de la sede principal" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                    <input id="direccionasesoractualizar" type="text" name="location" value="<?php echo $datosdelcolaborador['direccion'];?>" placeholder="Dirección" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
                     <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
                         <img src="https://img.icons8.com/material-outlined/24/cccccc/marker.png" alt="Location Icon">
                     </span>
                 </div>
 
+                <div style="margin-bottom: 16px; position: relative;">
+                    <input id="emailasesoractualizar" type="text" name="location" value="<?php echo $datosdelcolaborador['correo_contacto'];?>" placeholder="Email" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                    <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
+                        <img src="https://img.icons8.com/material-outlined/24/cccccc/mail.png" alt="Location Icon">
+                    </span>
+                </div>
+
+                <div style="margin-bottom: 16px; position: relative;">
+                    <input id="tarjetaasesoractualizar" type="text" name="tarjeta" value="<?php echo $datosdelcolaborador['tarjetaprofesional'];?>" placeholder="Tarjeta profesional" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                    <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
+                        <img src="https://img.icons8.com/?size=24&id=qePzjQLJYgjF&format=png&color=cccccc" alt="Location Icon">
+                    </span>
+                </div>
+
                 <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
                     <div style="margin-bottom: 16px; position: relative; width:49%;">
-                        <input type="number" value="<?php echo $datosdelcolaborador['telefono'];?>" name="Teléfono" placeholder="Teléfono" style="width: 100%; padding: 6px; padding-left:40px; width:calc(96% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                        <input id="telefonoasesoractualizar" type="number" value="<?php echo $datosdelcolaborador['telefono'];?>" name="Teléfono" placeholder="Teléfono" style="width: 100%; padding: 6px; padding-left:40px; width:calc(96% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
                         <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
                             <img src="https://img.icons8.com/material-outlined/24/cccccc/phone.png" alt="Identification Icon">
                         </span>
                     </div>
                     <div style="margin-bottom: 16px; position: relative; width:49%;">
-                        <input type="number" value="<?php echo $datosdelcolaborador['whatsapp'];?>" name="WhatsApp" placeholder="WhatsApp" style="width: 100%; padding: 6px; padding-left:40px; width:calc(98% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                        <input id="whatsappasesoractualizar" type="number" value="<?php echo $datosdelcolaborador['whatsapp'];?>" name="WhatsApp" placeholder="WhatsApp" style="width: 100%; padding: 6px; padding-left:40px; width:calc(98% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
                         <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
                             <img src="https://img.icons8.com/material-outlined/24/cccccc/whatsapp.png" alt="User Icon">
                         </span>
@@ -202,10 +273,10 @@ $datosdelcolaborador = [
 
                 <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
                     <div style="margin-bottom: 16px; position: relative; width:50%; "> 
-                        <button onclick="guradrcolaboradorsmodificado()" style="cursor:pointer; background-color:#ffffff; color:#47A1A8; border-radius:10px; border:2px solid #47A1A8; width:100%;height:35px;font-weight:600;">Cerrar</button>
+                        <button onclick="cerrarasesorsinmodificar()" style="cursor:pointer; background-color:#ffffff; color:#47A1A8; border-radius:10px; border:2px solid #47A1A8; width:100%;height:35px;font-weight:600;">Cerrar</button>
                     </div>
                     <div style="margin-bottom: 16px; position: relative; width:50%; margin-left:2%;">
-                        <button onclick="guradrcolaboradorsmodificado()" style="cursor:pointer; background-color:#47A1A8; color:#ffffff; border-radius:10px; border:none; width:100%;height:35px;font-weight:600;">Guardar</button>
+                        <button onclick="guradrcolaboradorsmodificado(<?php echo $datosdelcolaborador['id'];?>)" style="cursor:pointer; background-color:#47A1A8; color:#ffffff; border-radius:10px; border:none; width:100%;height:35px;font-weight:600;">Guardar</button>
                     </div>
                 </div>
 
@@ -238,20 +309,34 @@ $datosdelcolaborador = [
         <div id="listaempresasdeasesor" style="padding:2%; box-sizing: border-box;">
             <p style="margin:0; padding:0; color:#47A1A8; font-size:1.3vw; font-weight:700;">Informacion del colaborador</p>
             <p style="font-size:.7vw;  padding:0;">Este es un email transaccional, por tanto, debe ser de caracter informativo. No se espera que el usuario responda y no existe un historial.</p>
+            
             <div style="margin-bottom: 16px; position: relative;">
                 <input id="buscartodaslasempresas" oninput="filterCompanies()" type="text" placeholder="Buscar" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
                 <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
                     <img src="https://img.icons8.com/material-outlined/24/cccccc/search.png" alt="Company Icon">
                 </span>
             </div>
+
             <div style="margin-bottom: 10px; position: relative; height:80%; overflow-y: auto;">
                 <?php foreach ($colaborador as $colaboradors): ?>
-                    <div id="empresadeasesorlista<?php echo $colaboradors['id']; ?>" class="empresadeasesorlista" data-estadoc="<?php echo $colaboradors['estadoc']; ?>" style="width:100%; aspect-ratio:20/1; margin-bottom:.6%; background-color:#F2F3F6; border-radius:.5vw; display:flex; flex-direction:row; align-items:center;">
-                        <div style="height:100%; aspect-ratio:1/1; background-color:<?php echo $colaboradors['estadoc'] == 1 ? '#47A1A8' : '#FD7377'; ?>; margin-left:3%; border-radius:.3vw;"></div>
-                        <p class="nombreempresadelasesor" style="margin-left:2%; width:80%; font-size:.9vw; cursor:pointer;"><?php echo $colaboradors['nombre']; ?></p>
+                    <div id="empresadeasesorlista<?php echo $colaboradors['id']; ?>" class="empresadeasesorlista" data-estadoc="<?php echo $colaboradors['estadoc']; ?>" style="width:100%; aspect-ratio:18/1; margin-bottom:.6%; background-color:#F2F3F6; border-radius:.5vw; display:flex; flex-direction:row; align-items:center;">
+                                                
+                        <label class="switch" style="margin-left:3%; position: relative; display: inline-block; height: 100%; aspect-ratio: 1.8/1;">
+                            <input type="checkbox" id="switchc{{$colaboradors['id']}}" onchange="toggleswitchc({{$colaboradors['id']}})" style="opacity: 0; width: 0;" 
+                                <?php echo $colaboradors['estadoc'] == 1 ? 'checked' : ''; ?>>
+                            <span class="slideres <?php echo $colaboradors['estadoc'] == 1 ? 'on' : 'off'; ?>" style="display:flex; align-items:center; position: absolute; cursor: pointer; top: 10%; left: 10%; right: 0; bottom: 0; transition: background-color 0.4s ease; border-radius: 100vw;">
+                                <span style="position: absolute; content: ''; height: 75%; aspect-ratio: 1/1; border-radius: 50%; left: 8%; background-color: white; transition: transform 0.4s ease;"></span>
+                            </span>
+                        </label>
+                        <p id="nombreasesorlista<?php echo $colaboradors['id']; ?>" class="nombreempresadelasesor" style="margin-left:3%; width:80%; font-size:.9vw; cursor:pointer;"><?php echo $colaboradors['nombre']; ?></p>
+                        <img  onclick="eliminarcolaboradorc({{$colaboradors['id']}})" style="height:100%; margin-right:3%; cursor:pointer;" src="https://img.icons8.com/material-outlined/24/47A1A8/delete.png" alt="Edit Icon">
+                        <img  onclick="editarcolaborador({{$colaboradors['id']}})" style="height:100%; margin-right:4%; cursor:pointer;" src="https://img.icons8.com/material-outlined/24/47A1A8/edit.png" alt="Edit Icon">
+                   
                     </div>
                 <?php endforeach; ?>
             </div>
+
+            
             <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
             <button onclick="verlistaempresasdeasesor()" style="cursor:pointer; background-color:#47A1A8; color:#ffffff; border-radius:10px; border:none; width:100%;height:35px;font-weight:600;">Cerrar</button>
 
@@ -261,65 +346,72 @@ $datosdelcolaborador = [
     
     <script>
 
+
+
+
+
+
+
+
         //var colaboradors = <?php echo json_encode($colaborador); ?>;
         var colaboradoraeliminar = "";
 
+        
+        
         function filtrarempresacs() {
             const input = document.getElementById('buscarc').value.toLowerCase(); 
-            const estadocFiltro = document.getElementById('filtrarporestadocc').value; 
+            const seleccionFiltro = document.getElementById('filtrarporestadocc').value.toLowerCase(); 
             const empresacs = document.querySelectorAll('.empresac'); 
+
             empresacs.forEach(empresac => {
                 const nombreempresac = empresac.querySelector('.nombre-empresac').textContent.toLowerCase(); 
-                const estadocempresac = empresac.getAttribute('data-estadoc'); 
-                const coincideestadoc = (estadocFiltro === "Todos" || (estadocFiltro === "Activos" && estadocempresac == 1) || (estadocFiltro === "Inactivos" && estadocempresac == 0));
-                const coincideNombre = nombreempresac.includes(input);
-                if (coincideNombre && coincideestadoc) {
-                    empresac.style.display = 'flex';
+                const selectEmpresac = empresac.querySelector('select'); 
+                const seleccionEmpresac = selectEmpresac.options[selectEmpresac.selectedIndex].value.toLowerCase();
+
+                const coincideNombre = nombreempresac.includes(input); 
+                const coincideSeleccion = (seleccionFiltro === "todos" || seleccionFiltro === seleccionEmpresac); 
+
+                if (coincideNombre && coincideSeleccion) {
+                    empresac.style.display = 'flex'; 
                 } else {
-                    empresac.style.display = 'none';
+                    empresac.style.display = 'none'; 
                 }
             });
         }
 
-        function descargarCSV() {
-            const encabezados = ['ID', 'Nombre', 'estadoc', 'Porcentaje Completado', 'Tipología'];
-            let contenidoCSV = encabezados.join(',') + '\n'; 
-            colaboradors.forEach(colaborador => {
-                contenidoCSV += [
-                    colaborador.id,
-                    colaborador.nombre,
-                    colaborador.estadoc === 1 ? 'Activo' : 'Inactivo',
-                    colaborador.porcentajecompletado + '%',
-                    colaborador.tipologia
-                ].join(',') + '\n';
-            });
-            const blob = new Blob([ "\ufeff" + contenidoCSV ], { type: 'text/csv; charset=utf-8' });
-            const enlace = document.createElement('a');
-            enlace.href = URL.createObjectURL(blob);
-            enlace.download = 'colaboradors.csv';
-            enlace.click();
-        }
         function mostrarmodalsumarcolaborador(){
             document.getElementById('modalnuevocolaboradorc').style.display = "flex";
+            document.getElementById('cargoasesor').value = "";
+            document.getElementById('emailasesor').value = "";
+            document.getElementById('nombreasesor').value = "";
+            document.getElementById('cedulaasesor').value = "";
+            document.getElementById('tarjetaprofesioanlasesor').value = "";
+            document.getElementById('direccionasesor').value = "";
+            document.getElementById('telefonoasesor').value = "";
+            document.getElementById('whatsappasesor').value = "";
         }
         function ocultarmodalsumarcolaborador(){
             document.getElementById('modalnuevocolaboradorc').style.display = "none";
         }
         function eliminarcolaboradorc(id){
-            //alert('Eliminando colaborador numero  ' + id);
             colaboradoraeliminar = id;
+            document.getElementById('palabraeliminarc').value = "";
             document.getElementById('modaleliminarcolaboradorc').style.display = "flex";
         }
+        
         function confirmareliminarcolaboradorc(){
-            //alert(colaboradoraeliminar);
             let palabraeliminarc = document.getElementById('palabraeliminarc').value;
             if(palabraeliminarc === 'eliminar'){
                 document.getElementById('modaleliminarcolaboradorc').style.display = "none";
-                const empresacDiv = document.getElementById('empresac' + colaboradoraeliminar);
+                const empresacDiv = document.getElementById('empresadeasesorlista' + colaboradoraeliminar);
                 if (empresacDiv) {
                     empresacDiv.style.display = 'none';
+
+                    //logica para eliminar asesor de la base de datos
+
                 }
-                alert('colaborador ELIMINADO');
+
+                //alert('Colaborador '+colaboradoraeliminar+' eliminado');
                    
             }else{
                 alert('La palabra '+palabraeliminarc+' no coincide');
@@ -346,6 +438,7 @@ $datosdelcolaborador = [
                 //alert(id);  
             }
         }
+        
 
         function verlistaempresasdeasesor(id) {
             const slideDivc = document.getElementById('listaempresasdeasesor');
@@ -366,9 +459,41 @@ $datosdelcolaborador = [
             }
         }
 
-        function guradrcolaboradorsmodificado(){
+        function cerrarasesorsinmodificar(){
             const slideDivc = document.getElementById('slideDivc');
             slideDivc.classList.remove('active'); 
+        }
+
+        function guradrcolaboradorsmodificado(id){
+            const slideDivc = document.getElementById('slideDivc');
+            let cargoasesoractualizar= document.getElementById('cargoasesoractualizar').value;
+            let nombreasesoractualizar= document.getElementById('nombreasesoractualizar').value;
+            let cedulaasesoractualizar= document.getElementById('cedulaasesoractualizar').value;
+            let cantidadempactualizar= document.getElementById('cantidadempactualizar').value;
+            let direccionasesoractualizar= document.getElementById('direccionasesoractualizar').value;
+            let emailasesoractualizar= document.getElementById('emailasesoractualizar').value;
+            let tarjetaasesoractualizar= document.getElementById('tarjetaasesoractualizar').value;
+            let telefonoasesoractualizar= document.getElementById('telefonoasesoractualizar').value;
+            let whatsappasesoractualizar= document.getElementById('whatsappasesoractualizar').value;
+
+            document.getElementById('nombreasesorlista'+id).textContent = nombreasesoractualizar;
+            
+            //Logica para Actualizar Asesor
+            slideDivc.classList.remove('active'); 
+                alert(
+                    'Asesor actualizado:\n' +
+                    'ID: ' + id + '\n' +
+                    'Cargo: ' + cargoasesoractualizar + '\n' +
+                    'Nombre: ' + nombreasesoractualizar + '\n' +
+                    'Cédula: ' + cedulaasesoractualizar + '\n' +
+                    'Cantidad de empresas: ' + cantidadempactualizar + '\n' +
+                    'Dirección: ' + direccionasesoractualizar + '\n' +
+                    'Email: ' + emailasesoractualizar + '\n' +
+                    'Tarjeta: ' + tarjetaasesoractualizar + '\n' +
+                    'Teléfono: ' + telefonoasesoractualizar + '\n' +
+                    'WhatsApp: ' + whatsappasesoractualizar
+                );
+
         }
 
         function solicitardatoscolaboradorseleccionado(){
@@ -396,14 +521,22 @@ $datosdelcolaborador = [
         function toggleswitchc(colaboradorId) {
             var switchcElement = document.getElementById("switchc" + colaboradorId);
             var estadoc = switchcElement.checked ? 1 : 0;  
-                        var slider = switchcElement.nextElementSibling;
+            var slider = switchcElement.nextElementSibling;
+            var circle = slider.querySelector('span');
             var color = estadoc === 1 ? '#47A1A8' : '#FD7377';  
             slider.style.backgroundColor = color;
+
+            if (estadoc === 1) {
+                circle.style.transform = 'translateX(100%)';
+            } else {
+                circle.style.transform = 'translateX(0px)';
+            }
+            // Actualizar estado en el servidor
             actualizarestadoc(colaboradorId, estadoc);
         }
 
         function actualizarestadoc(colaboradorId, estadoc) {
-            var xhr = new XMLHttpRequest();
+            /*var xhr = new XMLHttpRequest();
             xhr.open("POST", "actualizar_estadoc.php", true); 
             xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             xhr.onreadystatechange = function() {
@@ -411,8 +544,9 @@ $datosdelcolaborador = [
                     console.log("estadoc de colaborador " + colaboradorId + " actualizado a " + estadoc);
                 }
             };
-            xhr.send("colaborador_id=" + colaboradorId + "&estadoc=" + estadoc);  // Enviar datos al servidor
+            xhr.send("colaborador_id=" + colaboradorId + "&estadoc=" + estadoc);  // Enviar datos al servidor*/
         }
+
 
         function toggleswitchcclientes(userId) {
             var checkbox = document.getElementById('switchc' + userId);
@@ -441,6 +575,36 @@ $datosdelcolaborador = [
                 }
             });
         }
+
+        function eliminarasesor(id){
+            alert('Eliminando #'+ id);
+            
+        }
+
+        function guardarnuevoasesor(){
+
+            let cargo = document.getElementById('cargoasesor').value;
+            let emailasesor = document.getElementById('emailasesor').value;
+            let nombreasesor = document.getElementById('nombreasesor').value;
+            let cedulaasesor = document.getElementById('cedulaasesor').value;
+            let tarjetaprofesioanlasesor = document.getElementById('tarjetaprofesioanlasesor').value;
+            let direccionasesor = document.getElementById('direccionasesor').value;
+            let telefonoasesor = document.getElementById('telefonoasesor').value;
+            let whatsappasesor = document.getElementById('whatsappasesor').value;
+            if (!cargo || !emailasesor || !nombreasesor || !cedulaasesor || !telefonoasesor || !whatsappasesor) {
+                alert('Por favor, completa todos los campos obligatorios.');
+                return;
+            }else{
+                alert('Creando nuevo Asesor en el sistema');
+                document.getElementById('modalnuevocolaboradorc').style.display = "none";
+            }    
+        }
+        
+        
+        function cerrarnuevoasesor(){
+            document.getElementById('modalnuevocolaboradorc').style.display = "none";
+        }
+
 
     </script>
 </body>

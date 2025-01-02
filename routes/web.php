@@ -16,6 +16,10 @@ use App\Models\Departments;
 use App\Models\Typologies;
 use Illuminate\Support\Facades\Session;
 
+use App\Mail\ComunicadoEmail;
+use Illuminate\Support\Facades\Mail;
+
+
 Route::get('/', function () {
     return view('home');
 })->name('home');
@@ -37,6 +41,27 @@ Route::post('/email/verification-notification', function (Request $request) {
     $request->user()->sendEmailVerificationNotification();
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+
+
+Route::post('/enviar-comunicado', function(Request $request) {
+    $asunto = $request->input('asunto');
+    $mensaje = $request->input('mensaje');
+    $email = $request->input('email');
+    $nombre = $request->input('nombre');
+
+    try {
+        Mail::to($email)->send(new ComunicadoEmail($asunto, $mensaje, $nombre));
+        return response()->json(['message' => 'Correo enviado con éxito']);
+    } catch (\Exception $e) {
+        return response()->json(['message' => 'Error al enviar el correo', 'error' => $e->getMessage()], 500);
+    }
+});
+
+
+
+
 
 
 Route::controller(TwoFAController::class)->group(function(){
@@ -69,7 +94,7 @@ Route::get('/admin', function(){
 })->middleware(['auth'])->name('admin');
 
 
-Route::middleware(['auth:api'])->group(function () {
+Route::middleware(['auth'])->group(function () {  // falta auth:api
     Route::get('/compañias',[CompanyController::class, 'index'])->name('compañias.index');
     Route::post('/compañias',[CompanyController::class,'store'])->name('compañias.store');
     Route::get('/compañias/{id}',[CompanyController::class, 'show'])->name('compañias.show');

@@ -5,10 +5,11 @@
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Habilita.Pro</title>
+    @vite('resources/js/alertas.js')
     <style>
         .container { display: flex; width: 100vw; height: 100vh; background-color: #F2F3F6; }
         .sidebar { width: 20%; display: flex; justify-content: center; margin-top:2%; min-width:250px;}
-        .sidebar-inner { width: 90%; height: 95%; background: #fff; border-radius: 14px; }
+        .sidebar-inner {width: 90%; height: 95%; background: #fff; border-radius: 14px; }
         .logo { width: 70%; aspect-ratio: 3/1; background: url(img/logo.png) center/90% no-repeat; margin: 11%; }
         .item { width: 80%; margin: 5px auto; display: flex; align-items: center; cursor: pointer; background-color:#47A1A8; border-radius:12px;}
         .item img { width: 15%; aspect-ratio: 1; }
@@ -61,19 +62,19 @@
                 @include('components.clientes', ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments])
             </div>
             <div id="permisos" class="component">
-                @include('components.permisos', ['titulo' => 'Permisos'])
+                @include('components.permisos',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments])
             </div>
             <div id="colaboradores" class="component">
-                @include('components.colaboradores', ['titulo' => 'Listado de Colaboradores'])
+                @include('components.colaboradores',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments])
             </div>
             <div id="normatividad" class="component">
-                @include('components.normatividad', ['titulo' => 'Listado de Modulos de Normatividad'])
+                @include('components.normatividad',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments])
             </div>
             <div id="facturacion" class="component">
-                @include('components.facturacion', ['titulo' => 'Facturación'])
+                @include('components.facturacion',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments])
             </div>
             <div id="alertas" class="component">
-                @include('components.alertas', ['titulo' => 'Listado de Alertas'])
+                @include('components.alertas',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments])
             </div>
         </div>
         

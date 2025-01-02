@@ -63,6 +63,7 @@ $modulos = [
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet">
+
     <style>
         #slideDiv { min-width: 450px; max-width: 30%; height: 100vh; background-color: #ffffff; position: fixed; top: 0; right: -600px; border-radius: 14px 0 0 14px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); transition: right 0.5s ease; } 
         #slideDiv.active { right: 0; } @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } } 
@@ -71,11 +72,12 @@ $modulos = [
     </style>
 </head>
 <body style="width: 100vw; height: 100vh; margin: 0; padding: 0; background-color: #F2F3F6; display: flex; align-items: center; justify-content: center;">
+    
     <div class="containerHome" style="width: 95vw; height: 90vh; display: flex; flex-direction: row; background-color: #FBFBFB; border-radius: 15px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);">
         
         <div id="logindiv" style="width: 25%; height: 100%; margin-left: 3%; display: flex;  flex-direction: column;">
            
-          <img src="/img/logo.svg " alt="" style="width:50%; margin-left:20%; margin-top:60px;">
+          <img onclick="showAlert('¡Este es un mensaje de alerta!')" src="/img/logo.svg " alt="" style="width:50%; margin-left:20%; margin-top:60px;">
 
           <div id="datoscliente" style="width:100%; height:8%; display:flex; flex-direction:row; margin-top:30px;">
 
@@ -203,6 +205,7 @@ $modulos = [
             <div style="width:100%; height:100%;overflow-y: auto; overflow-x: hidden; padding:3%; padding-top:0; padding-bottom:0;">
                 <p style="margin:0; padding:0; color:#47A1A8; font-size:1.3vw; font-weight:700;">Informacion del usuario</p>
                 <p style="font-size:.7vw;  padding:0;">Por favor, completa estos datos para que los revisores tengan toda la información necesaria y puedan verificar correctamente la documentación de tu empresa.</p>
+                
                 <form method="post" action="{{route('compañias.update', $Company->id)}}">
                     @csrf
                     @method("PUT")
@@ -311,14 +314,15 @@ $modulos = [
                     </div>
                 </form>
                 @if ($errors->any())
-                <div>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif  
+                    <div>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif  
+                
             </div>
         </div>
 
@@ -377,9 +381,8 @@ $modulos = [
                                             
             
             </div>
-        </div>                                       
-
-
+        </div>   
+        
     <script>
         let moduloactual = 0;
         const modulos = <?php echo json_encode($modulos); ?>;
@@ -625,9 +628,12 @@ $modulos = [
                     
                 }
             }
+
             
+
     </script>
 
+    
 
 </body>
 </html>
