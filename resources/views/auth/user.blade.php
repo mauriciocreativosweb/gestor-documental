@@ -233,7 +233,7 @@ $modulos = [
                         </span>
                     </div>
                     <div style="margin-bottom: 16px; position: relative;">
-                        <input type="text" name="contactEmail" value="{{$Company->contactEmail}}" placeholder="Nombre de la empresa o razón social" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                        <input type="text" name="contactEmail" value="{{$Company->contactEmail ? $Company->contactEmail : ''}}" placeholder="Correo de la empresa" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
                         <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
                             <img src="https://img.icons8.com/material-outlined/24/cccccc/building.png" alt="Company Icon">
                         </span>

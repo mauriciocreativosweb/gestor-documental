@@ -24,6 +24,8 @@ class reviewRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'email' => ['required', 'email', 'unique:users'],
+            'position' =>['required', 'string'],
+            'professionalCard' => ['required', 'string'] ,
             'password' => ['required', 'string']
         ];
     }

@@ -119,7 +119,7 @@
 													<table class="heading_block block-2" width="100%" border="0" cellpadding="50" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
 														<tr>
 															<td class="pad">
-																<h1 style="margin: 0; color: #47a1a8; direction: ltr; font-family: Arial, Helvetica, sans-serif; font-size: 38px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 45.6px;"><span class="tinyMce-placeholder" style="word-break: break-word;">Hola {{nombre}}</span></h1>
+																<h1 style="margin: 0; color: #47a1a8; direction: ltr; font-family: Arial, Helvetica, sans-serif; font-size: 38px; font-weight: 700; letter-spacing: normal; line-height: 120%; text-align: center; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 45.6px;"><span class="tinyMce-placeholder" style="word-break: break-word;">Hola {{}}</span></h1>
 															</td>
 														</tr>
 													</table>
@@ -128,7 +128,7 @@
 															<td class="pad">
 																<div style="color:#101112;direction:ltr;font-family:Arial, Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:150%;text-align:justify;mso-line-height-alt:24px;">
 																	<p style="margin: 0; margin-bottom: 16px;">Desde el sistema de gestión documental de Habilita.Pro, nos complace hacerte llegar la siguiente información relevante acerca de tu proceso de habilitación en salud:</p>
-																	<p style="margin: 0; margin-bottom: 16px;">{{$InfoCustomer}</p>
+																	<p style="margin: 0; margin-bottom: 16px;">{{}</p>
 																	<p style="margin: 0; margin-bottom: 16px;">&nbsp;</p>
 																	<p style="margin: 0;">Feliz día.&nbsp;<br>Cordialmente: Carolina Pachón</p>
 																</div>
