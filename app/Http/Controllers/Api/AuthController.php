@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\reviewRequest;
-use App\Mail\SendEmailCode;
 use App\Message\Success;
 use App\Message\Fail;
 use Illuminate\Http\Request;
@@ -27,11 +26,16 @@ class AuthController extends Controller
             }else{
                 $userNew = new User();
                 $userNew['name'] = $registerRequest->name;
+                $userNew['position'] ='user';
+                $userNew['IdUser'] = '';
                 $userNew['email'] = $registerRequest->email;
+                $userNew['professionalCard'] ='';
+                $userNew['address'] = '';
                 $userNew['password'] = $registerRequest->password;
                 $userNew['state'] = 1;
                 $userNew['icon'] = 'iconNewUser.jpg';
-                $userNew['cellphone'] = '0000000000';
+                $userNew['cellphone'] = '';
+                $userNew['whatsapp'] = '';
                 $userNew['user_code'] = 000000;
                 $userNew['state'] = 1;
                 $userNew->save();
@@ -56,11 +60,16 @@ class AuthController extends Controller
             }else{
                 $userNew = new User();
                 $userNew['name'] = $reviewRequest->name;
+                $userNew['position'] = $reviewRequest->position;
+                $userNew['IdUser'] = $reviewRequest->IdUser;
                 $userNew['email'] = $reviewRequest->email;
+                $userNew['professionalCard'] = $reviewRequest->professionalCard;
+                $userNew['address'] = $reviewRequest->address;
                 $userNew['password'] = $reviewRequest->password;
                 $userNew['state'] = 1;
                 $userNew['icon'] = 'iconNewUser.jpg';
-                $userNew['cellphone'] = '0000000000';
+                $userNew['cellphone'] = $reviewRequest->cellphone;
+                $userNew['whatsapp'] = $reviewRequest->whatsapp;
                 $userNew['user_code'] = 000000;
                 $userNew['state'] = 1;
                 $userNew->save();
@@ -119,6 +128,19 @@ class AuthController extends Controller
             }
         }catch(ModelNotFoundException $e){
             return back()->with('answer', Fail::failUserLogin);
+        }
+    }
+
+    public function update(Request $request, $id){
+        try{
+            $dataUser = $request->except(['_method','token']);
+            $user = User::findOrFail($id);
+            $user->update($dataUser);
+            return back()->with('message', Success::updateUserSuccess);
+        }catch(ModelNotFoundException $eModel){
+            return back()->with('message', Fail::failModelUpdateUser);
+        }catch(\Exception $eException){
+            return back()->with('message', Fail::failExceptionUpdateUser);
         }
     }
 }

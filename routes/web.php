@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\companyReviewController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\TwoFAController;
@@ -14,9 +15,12 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Company;
 use App\Models\Departments;
 use App\Models\Typologies;
+use App\Models\User;
 use Illuminate\Support\Facades\Session;
 
 use App\Mail\ComunicadoEmail;
+use App\Mail\infoAdminCustomerEmail;
+use App\Models\companyReview;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -42,8 +46,17 @@ Route::post('/email/verification-notification', function (Request $request) {
     return back()->with('message', 'Verification link sent!');
 })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
+Route::post('/enviarEmailUsuario', function(Request $request){
+    try{
+        $email = $request->input('companyEmail');
+        $message = $request->input('descriptionEmail');
+        Mail::to($email)->send(new infoAdminCustomerEmail());
+        return response()->json(['message' => 'Email enviado']);
+    }catch(\Exception $eExeption){
+        return response()->json(['message' => $eExeption->getMessage() ], 500);
+    }
 
-
+})->name('enviarEmailUsuario');
 
 Route::post('/enviar-comunicado', function(Request $request) {
     $asunto = $request->input('asunto');
@@ -57,11 +70,7 @@ Route::post('/enviar-comunicado', function(Request $request) {
     } catch (\Exception $e) {
         return response()->json(['message' => 'Error al enviar el correo', 'error' => $e->getMessage()], 500);
     }
-});
-
-
-
-
+})->middleware('role:admin');
 
 
 Route::controller(TwoFAController::class)->group(function(){
@@ -71,6 +80,11 @@ Route::controller(TwoFAController::class)->group(function(){
 });
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+
+Route::middleware(['auth','role:admin'])->group(function() {
+    Route::put('/actualizacion/{id}', [AuthController::class, 'update'])->name('actualizacion.update');
+});
 
 Route::get('/user', function(){
    $id = Session::get('idUser');
@@ -90,7 +104,9 @@ Route::get('/admin', function(){
     $Companies = Company::all();
     $Typologies = Typologies::all();
     $Departments = Departments::all();
-    return view('auth.admin', compact('Companies', 'Typologies', 'Departments'));
+    $Reviews = User::whereIn('position',['administrador','revisor'])->get();
+    $CompanyReviews = companyReview::all();
+    return view('auth.admin', compact('Companies', 'Typologies', 'Departments', 'Reviews','CompanyReviews'));
 })->middleware(['auth'])->name('admin');
 
 
@@ -135,3 +151,7 @@ Route::middleware(['auth'])->group(function(){
     Route::delete('/topologia/{id}', [TypologiesController::class , 'destroy'])->name('topologia.destroy');
 });
 
+Route::middleware(['auth'])->group(function(){
+    Route::put('/revisorCompania/{id}', [companyReviewController::class, 'update'])->name('revisorCompania.update');
+    Route::put('/updateReviewForCompany/{id}',[companyReviewController::class,'updateReviewForCompany'])->name('updateReviewForCompany.update');
+});

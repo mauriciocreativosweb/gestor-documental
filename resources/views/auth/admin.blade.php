@@ -59,22 +59,22 @@
         <!-- Content Area -->
         <div  class="content" id="ContenedorAdmin">
             <div id="clientes" class="component">
-                @include('components.clientes', ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments])
+                @include('components.clientes', ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments, 'Reviews' => $Reviews, 'CompanyReviews' => $CompanyReviews])
             </div>
             <div id="permisos" class="component">
-                @include('components.permisos',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments])
+                @include('components.permisos',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments, 'Reviews' => $Reviews, 'CompanyReviews' => $CompanyReviews])
             </div>
             <div id="colaboradores" class="component">
-                @include('components.colaboradores',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments])
+                @include('components.colaboradores',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments, 'Reviews' => $Reviews, 'CompanyReviews' => $CompanyReviews])
             </div>
             <div id="normatividad" class="component">
-                @include('components.normatividad',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments])
+                @include('components.normatividad',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments, 'Reviews' => $Reviews, 'CompanyReviews' => $CompanyReviews])
             </div>
             <div id="facturacion" class="component">
-                @include('components.facturacion',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments])
+                @include('components.facturacion',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments, 'Reviews' => $Reviews,'CompanyReviews' => $CompanyReviews])
             </div>
             <div id="alertas" class="component">
-                @include('components.alertas',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments])
+                @include('components.alertas',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments, 'Reviews' => $Reviews,'CompanyReviews' => $CompanyReviews])
             </div>
         </div>
         
