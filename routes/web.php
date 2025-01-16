@@ -155,4 +155,4 @@ Route::middleware(['auth'])->group(function(){
 Route::middleware(['auth'])->group(function(){
     Route::put('/revisorCompania/{id}', [companyReviewController::class, 'update'])->name('revisorCompania.update');
     Route::put('/updateReviewForCompany/{id}',[companyReviewController::class,'updateReviewForCompany'])->name('updateReviewForCompany.update');
-});
+});    
