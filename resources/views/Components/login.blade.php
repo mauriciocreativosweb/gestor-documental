@@ -114,9 +114,7 @@
     @if(session("answer"))
         <script>
             window.onload = function() {
-                if( '{{ session("answer") }}' === 'The email has already been taken.'){
-                    showAlert('{{ session("answer") }}', 'success');    
-                }
+                showAlert('{{ session("answer") }}', 'error');   
             }
         </script>
     @endif 

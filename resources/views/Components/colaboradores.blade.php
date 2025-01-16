@@ -32,6 +32,7 @@ $datosdelcolaborador = [
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>colaboradors</title>
+    @vite('resources/js/alertas.js')
   
     <style>
         .slideDivc { width: 500px; height: 100vh; background-color: #ffffff; position: fixed; top: 0; right: -600px; border-radius: 14px 0 0 14px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); transition: right 0.5s ease; } 
@@ -59,13 +60,17 @@ $datosdelcolaborador = [
             </div>
 
             <select id="filtrarporestadocc" style="padding-left:1%; font-size:.9vw; width:22%; height:115%; background-color:#ffffff; border: 2px solid #47A1A8; border-radius:12px;" onchange="filtrarempresacs()">
-                <option value="Todos">Todos</option>
-                    @foreach ($Reviews as $Review)
-                        @if ($Review['state'] == 1)
-                            <option value="{{$Review->name}}">{{$Review->name}}</option>
-                        @endif
-                    @endforeach
+                <option value="todos">Todos</option>
+
+                <!-- IMPORTANTE Usar una clase para verificar el correo del nuevo asesor no existe en la base de datos dentro de la funcion validarFormulario() o buscar hacerlo de manera asincrona para no se recargue la pagina -->
+                
+                @foreach ($Reviews as $Review)
+                    @if ($Review['state'] == 1) <!-- Incluir solo donde el estado sea 1 -->
+                        <option value="{{$Review->name}}">{{$Review->name}}</option>
+                    @endif
+                @endforeach
             </select>
+
 
             <div onclick="verlistaempresasdeasesor()" style="cursor:pointer; width:13%; height:100%; background-color:#ffffff; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
                 <p style="color:#47A1A8; font-size:.9vw;">Asesores</p>
@@ -82,7 +87,7 @@ $datosdelcolaborador = [
                         @csrf
                         @method('PUT')
                         <input type="hidden" name="idCompany" value="{{$Company['id']}}">
-                        <select name="idReview" id="idReviewSelect" style="padding-left:1%; font-size:.9vw; width:60%; height:90%; background-color:#ffffff; border: 2px solid #47A1A8; border-radius:12px;" onchange="AssingReview({{$Company['id']}})">
+                        <select name="idReview" id="idReviewSelect{{$Company['id']}}" style="padding:2% 3%; font-size:.9vw; width:90%; height:90%; background-color:#ffffff; border: 2px solid #47A1A8; border-radius:12px;" onchange="AssingReview({{$Company['id']}})">
                             @foreach ($Reviews as $Review)
                                 @php
                                     $selected = false;
@@ -111,7 +116,7 @@ $datosdelcolaborador = [
 
     <div id="modalnuevocolaboradorc" style="display:none; position:relative; width:150vw; height:150vh; background-color:rgba(50, 50, 50, 0.8); position:fixed; padding:0; margin:0; z-index: 99999; margin-left:-18.4%; align-items:center; justify-content:center;">
         <div style="position:relative; Width:50vw;height:auto;background-color:#ffffff; margin:0;padding:0;border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center;"> 
-            <form method="post" action={{route('reviewRegister')}}>
+            <form method="post" action={{route('reviewRegister')}} onsubmit="return validarFormulario(event)">
                 @csrf
                 <div style="height:80%; padding:3%; padding-top:5%; padding-bottom:5%;">
                     <p style="margin:0; padding:0; color:#47A1A8; font-size:1.3vw; font-weight:700;">Nuevo Asesor</p>
@@ -132,7 +137,7 @@ $datosdelcolaborador = [
                             </span>
                         </div>
                         <div style="margin-bottom: 16px; position: relative; width:49%;">
-                            <input id="cargoasesor" type="text" name="position" placeholder="Cargo" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                            <input readonly id="cargoasesor" value="revisor"  type="text" name="position" placeholder="Cargo" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
                             <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
                                 <img src="https://img.icons8.com/material-outlined/24/cccccc/building.png" alt="Company Icon">
                             </span>
@@ -205,7 +210,7 @@ $datosdelcolaborador = [
     </div>
 
     <div id="slideDivcd" style="padding:2%; box-sizing: border-box;">
-        <p style="margin:0; padding:0; color:#47A1A8; font-size:1.3vw; font-weight:700;">Informacion del colaborador</p>
+        <p style="margin:0; padding:0; color:#47A1A8; font-size:1.3vw; font-weight:700;">Informacion del colaboradorsss</p>
         <p style="font-size:.7vw;  padding:0;">Este es un email transaccional, por tanto, debe ser de caracter informativo. No se espera que el usuario responda y no existe un historial.</p>
         <div style="margin-bottom: 16px; position: relative;">
             <input id="asuntoemailcolaborador" type="text" name="empresac" placeholder="Asunto" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
@@ -228,8 +233,8 @@ $datosdelcolaborador = [
     </div>
 
     <div id="listaempresasdeasesor" style="padding:2%; box-sizing: border-box;">
-        <p style="margin:0; padding:0; color:#47A1A8; font-size:1.3vw; font-weight:700;">Informacion del colaborador</p>
-        <p style="font-size:.7vw;  padding:0;">Este es un email transaccional, por tanto, debe ser de caracter informativo. No se espera que el usuario responda y no existe un historial.</p>
+        <p style="margin:0; padding:0; color:#47A1A8; font-size:1.3vw; font-weight:700;">Listado de Asesores</p>
+        <p style="font-size:.7vw;  padding:0;">En esta lista podrá encontrar todos los asesores disponibles para revisar la documentación de los usuarios, su estado y sus datos.</p>
         
         <div style="margin-bottom: 16px; position: relative;">
             <input id="buscartodaslasempresas" oninput="filterCompanies()" type="text" placeholder="Buscar" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
@@ -369,10 +374,10 @@ function filtrarempresacs() {
     empresacs.forEach(empresac => {
         const nombreempresac = empresac.querySelector('.nombre-empresac').textContent.toLowerCase(); 
         const selectEmpresac = empresac.querySelector('select'); 
-        const seleccionEmpresac = selectEmpresac.options[selectEmpresac.selectedIndex].value.toLowerCase();
+        const seleccionEmpresac = selectEmpresac.options[selectEmpresac.selectedIndex].text.toLowerCase(); 
 
         const coincideNombre = nombreempresac.includes(input); 
-        const coincideSeleccion = (seleccionFiltro === "todos" || seleccionFiltro === seleccionEmpresac); 
+        const coincideSeleccion = (seleccionFiltro === "todos" || seleccionEmpresac.includes(seleccionFiltro)); 
 
         if (coincideNombre && coincideSeleccion) {
             empresac.style.display = 'flex'; 
@@ -382,9 +387,10 @@ function filtrarempresacs() {
     });
 }
 
+
 function mostrarmodalsumarcolaborador(){
     document.getElementById('modalnuevocolaboradorc').style.display = "flex";
-    document.getElementById('cargoasesor').value = "";
+    document.getElementById('cargoasesor').value = "revisor";
     document.getElementById('emailasesor').value = "";
     document.getElementById('nombreasesor').value = "";
     document.getElementById('cedulaasesor').value = "";
@@ -521,6 +527,36 @@ function cerrareliminarcolaboradorc(){
 
 
 async function channeStateReview(idReview,event) {
+    let nombredelrevisor =  document.getElementById('nombreasesorlista'+idReview).textContent;
+
+
+    const selectElement = document.getElementById('filtrarporestadocc');
+    const newValue = nombredelrevisor;
+    const newText = nombredelrevisor;
+    let optionExists = false;
+    let existingOptionIndex = -1;
+
+    for (let i = 0; i < selectElement.options.length; i++) {
+        if (selectElement.options[i].value === newValue) {
+            optionExists = true;
+            existingOptionIndex = i; 
+            break;
+        }
+    }
+
+    // Si existe, eliminar la opción; si no, añadirla
+    if (optionExists) {
+        selectElement.remove(existingOptionIndex); 
+        console.log(`Opción con valor '${newValue}' eliminada.`);
+    } else {
+        const newOption = document.createElement('option');
+        newOption.value = newValue;
+        newOption.textContent = newText;
+        selectElement.appendChild(newOption);
+        console.log(`Opción con valor '${newValue}' añadida.`);
+    }
+
+
     try{
     event.preventDefault();     
     //const token = sessionStorage.getItem('token_bearer');
@@ -554,8 +590,11 @@ async function channeStateReview(idReview,event) {
         } else {
             circle.style.transform = 'translateX(0px)';
         }
-        alert('se actualizo');
-        window.location.reload('/admin');
+        //alert('se actualizo');
+        showAlert('se actualizo el estado', 'success');
+        
+        //window.location.reload('/admin');   /// Revisar si es necesario
+
     }else{
         const errorText = await response.text();
         console.error('Error en la respuesta:', errorText);
@@ -565,6 +604,7 @@ async function channeStateReview(idReview,event) {
         console.error('Error en la solicitud:', $err);
         alert('Ocurrió un error al enviar la solicitud.');
     }
+
 }
     
 
@@ -602,6 +642,19 @@ function eliminarasesor(id){
     
 }
 
+function validarFormulario(event) {
+        const camposRequeridos = document.querySelectorAll('#nombreasesor, #emailasesor, #cedulaasesor, #tarjetaprofesioanlasesor, #direccionasesor, #password, #telefonoasesor, #whatsappasesor');
+        for (const campo of camposRequeridos) {
+            if (campo.value.trim() === '') {
+                showAlert(`El campo "${campo.placeholder}" es obligatorio.`,'error');
+                campo.focus();
+                return false; 
+            }
+        }
+        
+        return true; // Permite enviar el formulario
+    }
+
 function guardarnuevoasesor(){
 
     let cargo = document.getElementById('cargoasesor').value;
@@ -613,10 +666,15 @@ function guardarnuevoasesor(){
     let telefonoasesor = document.getElementById('telefonoasesor').value;
     let whatsappasesor = document.getElementById('whatsappasesor').value;
     if (!cargo || !emailasesor || !nombreasesor || !cedulaasesor || !telefonoasesor || !whatsappasesor) {
-        alert('Por favor, completa todos los campos obligatorios.');
+        //alert('Por favor, completa todos los campos obligatorios.');
+        //showAlert('Por favor, completa todos los campos obligatorios.', 'error');
+
+        
+
+
         return;
     }else{
-        alert('Creando nuevo Asesor en el sistema');
+        showAlert('Creando nuevo Asesor en el sistema', 'success');
         document.getElementById('modalnuevocolaboradorc').style.display = "none";
     }    
 }
@@ -642,15 +700,18 @@ async function AssingReview(id) {
         });
 
         if (response.ok) {
-            alert('Se actualizó correctamente');
+            showAlert('Se actualizó correctamente', 'success');
+            //alert('Se actualizó correctamente');
         } else {
             const errorText = await response.text();
             console.error('Error en la respuesta:', errorText);
-            alert(`Error: ${errorText}`);
+            //alert(`Error: ${errorText}`);
+            showAlert(`Error: ${errorText}`, 'error');
         }
     } catch (err) {
         console.error('Error en la solicitud:', err);
-        alert('Ocurrió un error al enviar la solicitud.');
+        //alert('Ocurrió un error al enviar la solicitud.');
+        showAlert('Ocurrió un error al enviar la solicitud.', 'error');
     }
 }
 
@@ -671,16 +732,19 @@ async function updateUserData(id, event){
         body : JSON.stringify(data)
     });
     if(response.ok){
-        alert('se actualizo');
-        window.location.reload('/admin');
+        //alert('se actualizo');
+        showAlert('se actualizo el estado', 'success');
+        //window.location.reload('/admin');
     }else{
         const errorText = await response.text();
         console.error('Error en la respuesta:', errorText);
-        alert(`Error: ${errorText}`);
+        //alert(`Error: ${errorText}`);
+        showAlert(`Error: ${errorText}`, 'error');
     }
     }catch($err){
         console.error('Error en la solicitud:', $err);
-        alert('Ocurrió un error al enviar la solicitud.');
+        //alert('Ocurrió un error al enviar la solicitud.');
+        showAlert('Ocurrió un error al enviar la solicitud.', 'error');
     }
 }
 

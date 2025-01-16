@@ -1,46 +1,67 @@
 <?php
 $msdemmodulo = [
-    ['id' => 1, 'nombre' => 'Modulo 1', 'estado' => 0, 'porcentajecompletado'=> 60, 'mlogia' => 'Modulo 1', 'moduloss' => [1, 2, 3, 4, 5]],
-    ['id' => 2, 'nombre' => 'Modulo 2', 'estado' => 1, 'porcentajecompletado'=> 40, 'Modulo 2' => 'Clinica estetica', 'moduloss' => [3, 2, 1, 9]],
-    ['id' => 3, 'nombre' => 'Modulo 3', 'estado' => 1, 'porcentajecompletado'=> 60, 'Modulo 3' => 'Spa', 'moduloss' => [2, 3, 5]],
-];
-
-$modulossseleccionar = [
-    ['id' => 1, 'nombre' => 'Recursos humanos', 'estado' => 0, 'porcentajecompletado'=> 60, 'mlogia' => 'Spa', 'color' => '#fd7377', 'icono' => 'img/moduloicono1.png'],
-    ['id' => 2, 'nombre' => 'establecimiento e infraetructura', 'estado' => 1, 'porcentajecompletado'=> 40, 'mlogia' => 'Clinica estetica', 'color' => '#62646f', 'icono' => 'img/moduloicono2.png'],
-    ['id' => 3, 'nombre' => 'Tratamiento de medicamentos', 'estado' => 0, 'porcentajecompletado'=> 60, 'mlogia' => 'Spa', 'color' => '#f2ac3e', 'icono' => 'img/moduloicono3.png'],
-    ['id' => 4, 'nombre' => 'Recursos humanos', 'estado' => 0, 'porcentajecompletado'=> 60, 'mlogia' => 'Spa', 'color' => '#7b6cc9', 'icono' => 'img/moduloicono4.png'],
-    ['id' => 5, 'nombre' => 'establecimiento e infraetructura', 'estado' => 1, 'porcentajecompletado'=> 40, 'mlogia' => 'Clinica estetica', 'color' => '#ffca55', 'icono' => 'img/moduloicono5.png'],
-    ['id' => 6, 'nombre' => 'Tratamiento de medicamentos', 'estado' => 0, 'porcentajecompletado'=> 60, 'mlogia' => 'Spa', 'color' => '#ff5055', 'icono' => 'img/moduloicono6.png'],
-    ['id' => 7, 'nombre' => 'Recursos humanos', 'estado' => 0, 'porcentajecompletado'=> 60, 'mlogia' => 'Spa', 'color' => '#47a1a8', 'icono' => 'img/moduloicono7.png'],
-    ['id' => 8, 'nombre' => 'establecimiento e infraetructura', 'estado' => 1, 'porcentajecompletado'=> 40, 'mlogia' => 'Clinica estetica', 'color' => '#ffca55', 'icono' => 'img/moduloicono8.png'],
-    ['id' => 9, 'nombre' => 'Tratamiento de medicamentos', 'estado' => 0, 'porcentajecompletado'=> 60, 'mlogia' => 'Spa', 'color' => '#7a8ffa', 'icono' => 'img/moduloicono3.png'],
-   
-];
-
-$informaciondelmmmodulo = [
-    'id'                      => 1,
-    'nombre_mmodulo'          => 'Nombre de la mmodulo numero uno',
-    'nit'                     => '123456789',
-    'numero_empleados'        => 150,
-    'mlogia'               => 'Spa',
-    'direccion'               => 'Calle Falsa 123, Ciudad',
-    'telefono'                => '3102640456',
-    'whatsapp'                => '573102640456',
-    'representante_legal'     => 'Juan Pérez',
-    'sitio_web'               => 'https://www.ejemplo.com',
-    'descripcion_mmodulo'     => 'Descripción breve de la mmodulo y sus actividades.',
-    'estado'                  => 1,
-    'ultima_fecha_pago'       => '2024-10-01',
-    'fecha_vencimiento_pago'  => '2024-11-01',
-    'correo_contacto'         => 'contacto@ejemplo.com',
-    'representante_telefono'  => '+591 456 789 012',
-    'fecha_creacion'          => '2022-01-15',
-    'm_persona'            => 'Jurídica',
-    'sector'                  => 'Salud',
-    'asesor'                  => 'Asesor #3',
-    'ciudad'                  => 'Bogotá',
-    'porcentajecompletado'    => 60,
+    [
+        'id' => 1,
+        'nombre' => 'Modulo 1',
+        'estado' => 0,
+        'color' => '#47a1a8',
+        'icono' => '1.svg',
+        'documentos' => [
+            [
+                'nombre' => 'Documento 1',
+                'descripcion' => 'Descripción del documento 1',
+                'url' => 'https://ejemplo.com/documento1',
+                'urlvideo' => 'https://ejemplo.com/video1',
+                'tipo' => 'PDF'
+            ],
+            [
+                'nombre' => 'Documento 2',
+                'descripcion' => 'Descripción del documento 2',
+                'url' => 'https://ejemplo.com/documento2',
+                'urlvideo' => 'https://ejemplo.com/video2',
+                'tipo' => 'Word'
+            ],
+        ],
+    ],
+    [
+        'id' => 2,
+        'nombre' => 'Modulo 2',
+        'estado' => 1,
+        'color' => '#7a8ffa',
+        'icono' => '5.svg',
+        'documentos' => [
+            [
+                'nombre' => 'Documento 3',
+                'descripcion' => 'Descripción del documento 3',
+                'url' => 'https://ejemplo.com/documento3',
+                'urlvideo' => 'https://ejemplo.com/video3',
+                'tipo' => 'Excel'
+            ],
+        ],
+    ],
+    [
+        'id' => 3,
+        'nombre' => 'Modulo 3',
+        'estado' => 1,
+        'color' => '#fd7377',
+        'icono' => '8.svg',
+        'documentos' => [
+            [
+                'nombre' => 'Documento 4',
+                'descripcion' => 'Descripción del documento 4',
+                'url' => 'https://ejemplo.com/documento4',
+                'urlvideo' => 'https://ejemplo.com/video4',
+                'tipo' => 'PowerPoint'
+            ],
+            [
+                'nombre' => 'Documento 5',
+                'descripcion' => 'Descripción del documento 5',
+                'url' => 'https://ejemplo.com/documento5',
+                'urlvideo' => 'https://ejemplo.com/video5',
+                'tipo' => 'PDF'
+            ],
+        ],
+    ],
 ];
 
 
@@ -59,7 +80,8 @@ $informaciondelmmmodulo = [
         .switchmmmodulo input{opacity:0;width:0}.slideres{display:flex;align-items:center;position:absolute;cursor:pointer;top:10%;left:10%;right:0;bottom:0;background-color:#FD7377;transition:0.4s;border-radius:100vw}.slideres span{position:absolute;content:'';height:75%;aspect-ratio:1/1;border-radius:50%;left:8%;background-color:white;transition:0.4s}.slideres.on{background-color:#47A1A8}.slideres.off{background-color:#FD7377}.slideres.on span{transform:translateX(100%)}.slideres.off span{transform:translateX(0)}
         #slideDivmmmodulo { width: 500px; height: 100vh; background-color: #ffffff; position: fixed; top: 0; right: -600px; border-radius: 14px 0 0 14px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); transition: right 0.5s ease; } 
         #slideDivmmmodulo.active { right: 0; } @keyframes floating { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } } 
-    
+
+        .colores{aspect-ratio:1/1; border-radius:100%; cursor:pointer;}
         .acordeon-container {width: 100%; margin: 0 auto; margin:0; padding:0;}
         .acordeon {border-radius:10px; background-color: #F2F3F6; width: 100%; aspect-ratio:13/1; border: none;text-align: left;cursor: pointer;font-size: 18px;transition: 0.3s; margin-top:.8%;}
         .acordeon:hover {background-color: #ffffff;}
@@ -70,7 +92,7 @@ $informaciondelmmmodulo = [
 <body style="overflow:hidden;">
     
     <div style="width:100%; height:100%; box-sizing: border-box; padding-left:3%;">
-        <h1 style="color:#47A1A8;">moduloss y normatividad</h1>
+        <h1 style="color:#47A1A8;">modulos y normatividad</h1>
         <p style="font-size:1vw;">En esta sección puedes gestionar cada uno de los moduloss, es decir las listas de la documentacion que debe cumplir cada usuario</p>
         
         <div style="width:96%; aspect-ratio:35/1; display:flex; flex-direction:row; justify-content: space-between;">
@@ -86,10 +108,10 @@ $informaciondelmmmodulo = [
                 <option value="Inactivos">Inactivos</option>
             </select>
 
-            <div onclick="mostrarmodalsumarusuario()" style="cursor:pointer; width:13%; height:100%; background-color:#ffffff; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
-                <p style="color:#47A1A8; font-size:.9vw;">+ Nuevo modulo</p>
+            <div onclick="editarmmmodulo()" style="cursor:pointer; width:13%; height:100%; background-color:#ffffff; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
+                <p style="color:#47A1A8; font-size:.9vw;">+ Nuevo Modulo</p>
             </div>
-            <div  style="cursor:pointer; width:13%; height:100%; background-color:#47A1A8; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
+            <div onclick="guardartodo()" style="cursor:pointer; width:13%; height:100%; background-color:#47A1A8; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
                 <p style="color:#ffffff; font-size:.9vw;">Guardar todo</p>
             </div>
         </div>
@@ -99,69 +121,66 @@ $informaciondelmmmodulo = [
         
             <div id="listammmodulo" style="width:50%; height:100%; margin-top:20px; overflow-y: auto; padding:1%; box-sizing:border-box;">
                 
-                    <?php foreach ($msdemmodulo as $msdemmoduloss): ?>
-                        <div id="mmodulo<?php echo $msdemmoduloss['id']; ?>" class="mmodulossc" data-estado="<?php echo $msdemmoduloss['estado']; ?>" 
-                            style="width:100%; aspect-ratio:25/1; margin-bottom:.6%; background-color:#F2F3F6; border-radius:.5vw; display:flex; flex-direction:row; align-items:center; cursor:pointer;" 
-                            onclick="seleccionarmmodulo(<?php echo $msdemmoduloss['id']; ?>)">
-                            <p id="nombremmodulo<?php echo $msdemmoduloss['id']; ?>" class="nombremmodulo" style="margin-left:2%; width:80%; font-size:.9vw;"><?php echo $msdemmoduloss['nombre']; ?></p>
-                            <div style="width:10%; height:100%; display:flex; flex-direction:row; justify-content: flex-end; align-items:center;">
-                                <img id="eliminarmmodulo<?php echo $msdemmoduloss['id']; ?>" class="eliminarmmodulo" onclick="eliminarmmmodulo(<?php echo $msdemmoduloss['id']; ?>)" style=" height:80%; margin-right:8%; cursor:pointer;" src="https://img.icons8.com/material-outlined/24/47A1A8/delete.png" alt="Delete Icon">
-                                <img id="editarmmodulo<?php echo $msdemmoduloss['id']; ?>" class="editarmmodulo" onclick="editarmmmodulo(<?php echo $msdemmoduloss['id']; ?>)" style="height:80%; margin-right:8%; cursor:pointer;" src="https://img.icons8.com/material-outlined/24/47A1A8/edit.png" alt="Edit Icon">
-                            </div>
-                            <label class="switchmmmodulo" style="margin-right:2%; position: relative; display: inline-block; height: 100%; aspect-ratio:1.8/1;">
-                                <input type="checkbox" id="switchmmmodulo<?php echo $msdemmoduloss['id']; ?>" onchange="toggleswitchmmmoduloclientes(<?php echo $msdemmoduloss['id']; ?>)" style="opacity: 0; width: 0;" <?php echo ($msdemmoduloss['estado'] == 1) ? 'checked' : ''; ?>>
-                                <span class="slideres <?php echo ($msdemmoduloss['estado'] == 1) ? 'on' : 'off'; ?>" style="display:flex; align-items:center; position: absolute; cursor: pointer; top: 10%; left: 10%; right: 0; bottom: 0; transition: 0.4s; border-radius:100vw;">
-                                    <span style="position: absolute; content: ''; height: 75%; aspect-ratio:1/1; border-radius: 50%; left: 8%; background-color: white; transition: 0.4s;"></span>
-                                </span>
-                            </label>
+                <?php foreach ($msdemmodulo as $msdemmoduloss): ?>
+                    <div id="mmodulo<?php echo $msdemmoduloss['id']; ?>" class="mmodulossc" data-estado="<?php echo $msdemmoduloss['estado']; ?>" 
+                        style="width:100%; aspect-ratio:25/1; margin-bottom:.6%; background-color:#F2F3F6; border-radius:.5vw; display:flex; flex-direction:row; align-items:center; cursor:pointer;" onclick="seleccionarmmodulo(<?php echo $msdemmoduloss['id']; ?>)">
+                        <div style="height:150%; border-radius:5px; aspect-ratio:1/1; background-color:<?php echo $msdemmoduloss['color']; ?>; margin-left:1%;">
+                            <img style="height:100%;" src="img/<?php echo $msdemmoduloss['icono']; ?>" alt="icono">
                         </div>
-                    <?php endforeach; ?>
+                        <p id="nombremmodulo<?php echo $msdemmoduloss['id']; ?>" class="nombremmodulo" style="margin-left:2%; width:80%; font-size:.9vw;"><?php echo $msdemmoduloss['nombre']; ?></p>
+                        <div style="width:10%; height:100%; display:flex; flex-direction:row; justify-content: flex-end; align-items:center;">
+                            <img id="eliminarmmodulo<?php echo $msdemmoduloss['id']; ?>" class="eliminarmmodulo" onclick="eliminarmmmodulo(<?php echo $msdemmoduloss['id']; ?>)" style=" height:80%; margin-right:8%; cursor:pointer;" src="https://img.icons8.com/material-outlined/24/47A1A8/delete.png" alt="Delete Icon">
+                            <img id="editarmmodulo<?php echo $msdemmoduloss['id']; ?>" class="editarmmodulo" onclick="editarmmmodulo(<?php echo $msdemmoduloss['id']; ?>)" style="height:80%; margin-right:8%; cursor:pointer;" src="https://img.icons8.com/material-outlined/24/47A1A8/edit.png" alt="Edit Icon">
+                        </div>
+                        
+                    </div>
+                <?php endforeach; ?>
                 
             </div>
             <div id="listammmodulo" style="border-radius:10px; background-color:#47A1A8; width:50%; height:100%; margin-top:15px; overflow-y: auto; padding:1%; box-sizing:border-box;">
              
+                <div>
+                    <div class="acordeon" style="background-color:transparent; justify-content: flex-end; display:flex; flex-direction:row; padding-left:3%; box-sizing:border-box; align-items:center;">    
+                        <div onclick="nuevodocumento()" style=" cursor:pointer; width:30%; height:70%; margin-right:1%; background-color:#ffffff; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #ffffff;">
+                            <p style="color:#47A1A8; font-size:.9vw;">+ Nuevo documento</p>
+                        </div>
+                    </div>
+                    
+                </div>
         
 
             <div class="acordeon-container">
 
-                <div id="listadedocumentos" style="width:100%; height:100%; display:none; flex-direction:column;">
-
+                <!--<div id="listadedocumentos" style="width:100%; height:100%; display:none; flex-direction:column;">                    
                     <div class="acordeon-item" draggable="true">
                         <div class="acordeon" style="display:flex; flex-direction:row; padding-left:3%; box-sizing:border-box; align-items:center; justify-content: space-between;">
-                            <p class="abriracordion">Titulo del documento numero uno</p>
-                            <div style="margin-right:3%; height:60%; aspect-ratio:1/1; border-radius:8px; background-color:#2085ec; position:relative; cursor:pointer;" onclick="document.getElementById('colorInput').click();">
-                                <input id="colorInput" type="color" style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" onchange="this.parentElement.style.backgroundColor=this.value">
-                            </div>
+                            <p class="abriracordion" style="width:70%;">Titulo del documento numero uno</p>
+                            <img src="https://img.icons8.com/material-outlined/24/47A1A8/delete.png" alt="eliminar" style="height:50%; margin-right:3%;">
                         </div>
                         <div class="panel">
-                            <p>Contenido de la sección 1</p>
-                        </div>
-                    </div>
-                    <div class="acordeon-item" draggable="true">
-                        <div class="acordeon" style="display:flex; flex-direction:row; padding-left:3%; box-sizing:border-box; align-items:center; justify-content: space-between;">
-                            <p class="abriracordion">Titulo del documento numero dos</p>
-                            <div style="margin-right:3%; height:60%; aspect-ratio:1/1; border-radius:8px; background-color:#2085ec; position:relative; cursor:pointer;" onclick="document.getElementById('colorInput').click();">
-                                <input id="colorInput" type="color" style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" onchange="this.parentElement.style.backgroundColor=this.value">
+                            <div style="margin-bottom: 16px; position: relative;">
+                                <div style="display:flex; flex-direction:row;">
+                                    <input id="ulrdelfile" type="text" name="mmodulo" value="" placeholder="URL de documento ejemplo" style="width: 70%; padding: 6px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                                    <label for="fileInput" id="botonfile" style="cursor:pointer; width:30%; height:32px; margin-left:1%; background-color:#47A1A8; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
+                                        <p style="color:#ffffff; font-size:.9vw; margin: 0;">Subir ejemplo</p>
+                                    </label>
+                                    <input type="file" id="fileInput" style="display: none;" onchange="document.getElementById('ulrdelfile').value = this.files[0]?.name || '';">
+                                </div>
+                                <select name="" id="" class="" placeholder="Enlace a formulario" style="width:100%; height:35px; margin-top:10px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                                    <option value="" selected disabled>Seleccione un formulario si es necesario</option>
+                                    <option value="formulario1">Formulario 1</option>
+                                </select>
+                                <input id="" type="text" name="" value="" placeholder="URL de video explicativo" style="margin-top:10px; width: 98%; padding: 6px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                                <div style="margin-bottom: 10px; position: relative;">
+                                    <textarea id="" name="" placeholder="Descripcion de la mmodulo" rows="3" style="width: 98%; aspect-ratio:1/.2; margin-top:10px; padding: 6px 6px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 16px; background-color: #FAFBFE; color: #333; resize: none;"></textarea>
+                                </div>
+                            </div>
+                            <div onclick="guardartodo()" style="cursor:pointer; width:30%; height:30px; margin-right:1%; background-color:#47A1A8; border-radius:10px; display:flex; align-items:center; justify-content:center; border: 2px solid #47A1A8;">
+                                <p style="color:#ffffff; font-size:.9vw;">Guardar documento</p>
                             </div>
                         </div>
-                        <div class="panel">
-                            <p>Contenido de la sección 1</p>
-                        </div>
                     </div>
-                    <div class="acordeon-item" draggable="true">
-                        <div class="acordeon" style="display:flex; flex-direction:row; padding-left:3%; box-sizing:border-box; align-items:center; justify-content: space-between;">
-                            <p class="abriracordion">Titulo del documento numero tres</p>
-                            <div style="margin-right:3%; height:60%; aspect-ratio:1/1; border-radius:8px; background-color:#2085ec; position:relative; cursor:pointer;" onclick="document.getElementById('colorInput').click();">
-                                <input id="colorInput" type="color" style="position:absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" onchange="this.parentElement.style.backgroundColor=this.value">
-                            </div>
-                        </div>
-                        <div class="panel">
-                            <p>Contenido de la sección 1</p>
-                        </div>
-                    </div>
-                </div>
-
-
+                </div>-->
             </div>
 
                 
@@ -195,96 +214,69 @@ $informaciondelmmmodulo = [
             <p onclick="cerrareliminarmmmodulo()" style="color:#47A1A8; cursor:pointer;">Cerrar</p>
         </div> 
     </div>
+    <div id="modalnuevodocumento" style="display:none; position:relative; width:150vw; height:150vh; background-color:rgba(50, 50, 50, 0.8); position:fixed; padding:0; margin:0; z-index: 99999; margin-left:-18.4%; align-items:center; justify-content:center;">
+        <div style="position:relative; Width:50vw;height:50vh;;background-color:#ffffff; margin:0;padding:0;border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+            <img src="img/logo.svg" alt="logo" style="width:30%; margin-bottom:3%;">
+            <input id="nombredelnuevodocumento" type="text" autocomplete="off" name="name"placeholder="Nombre del nuevo documento" style=" text-align:center;width:50%;height:30px;border-radius:12px;border:2px solid #47A1A8;">
+            <div  onclick="crearnuevodocumento()" style="background-color:#47A1A8; margin-top:10px; width:200px; height:35px; border-radius:9px; display:flex; align-items:center; justify-content:center; cursor:pointer;"><p style="color:#ffffff; width:100%;height:50%;text-align:center;padding:0;">Crear documento</p></div>
+            <p onclick="ocultarmodalsumardocumento()" style="color:#47A1A8; cursor:pointer;">Cerrar</p>
+        </div>
+    </div>
+    <div id="modaleliminardocumento" style="display:none; position:relative; width:150vw; height:150vh; background-color:rgba(50, 50, 50, 0.8); position:fixed; padding:0; margin:0; z-index: 99999; margin-left:-18.4%; align-items:center; justify-content:center;">
+        <div style="position:relative; Width:50vw;height:50vh;;background-color:#ffffff; margin:0;padding:0;border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+            <img src="img/logo.svg" alt="logo" style="width:30%;">
+            <p style="width:50%;text-align:center; font-size:.9vw;">Para eliminar de manera <b>permanente</b> este usuario por favor escriba <b>la palabra "eliminar"</b></p>
+            <input id="palabraeliminardocumento" type="nombre" placeholder="Escriba la palabra eliminar" style=" text-align:center;width:50%;height:30px;border-radius:12px;border:2px solid #47A1A8;">
+            <div onclick="confirmareliminardocumento()" style="background-color:#47A1A8; margin-top:10px; width:200px; height:35px; border-radius:9px; display:flex; align-items:center; justify-content:center; cursor:pointer;"><p style="color:#ffffff; width:100%;height:50%;text-align:center;padding:0;">Eliminar</p></div>
+            <p onclick="cerrarmodaleliminardocumento()" style="color:#47A1A8; cursor:pointer;">Cerrar</p>
+        </div> 
+    </div>
 
     <!--slide-->
     <div id="slideDivmmmodulo" style="padding:2%; box-sizing: border-box;">
 
             <div style="height:100%; overflow-y: auto; overflow-x: hidden; padding:3%; padding-top:0; padding-bottom:0;">
-                <p style="margin:0; padding:0; color:#47A1A8; font-size:1.3vw; font-weight:700;">Informacion del usuario</p>
+                <p style="margin:0; padding:0; color:#47A1A8; font-size:1.3vw; font-weight:700;">Crea un nuevo Modulo</p>
                 <p style="font-size:.7vw;  padding:0;">A continuación se muestra la información del usuario seleccionado. Por favor, no realices modificaciones a menos que sea estrictamente necesario.</p>
 
-                <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
-                <div style="margin-bottom: 16px; position: relative; width:49%;">
-                    <input type="text" name="ciudad" value="<?php echo $informaciondelmmmodulo['ciudad']; ?>" placeholder="Ciudad" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
+                <div style="height:15%; width:100%; display:flex; justify-content:center; align-items:center;">
+                   
+                    <img onclick="moveSlide('left')" src="img/izquierda.svg" alt="antes" style="height:25%; cursor:pointer; padding:10%;">
+                    <div id="fondoicono" style="display:flex; justify-content:center; align-items:center; height:100%; aspect-ratio:1/1; background-color:#47a1a8; border-radius: 10px;">
+                        <img id="iconoseleccionado" src="img/12.svg" alt="icono" style="width:90%;">
+                    </div>
+                    <img onclick="moveSlide('right')" src="img/derecha.svg" alt="antes" style="height:25%;cursor:pointer; padding:10%;">
+                    
+                </div>
+
+                <div style="width:60%; margin-left:20%; margin-top:20px; margin-bottom:20px; display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(2, auto); gap: 10px; ">
+                    <div onclick="seleccionarcolor('#f9af40')" class="colores" style="background-color: #f9af40;"></div>
+                    <div onclick="seleccionarcolor('#ff5055')" class="colores" style="background-color: #ff5055;"></div>
+                    <div onclick="seleccionarcolor('#7bd2cd')" class="colores" style="background-color: #7bd2cd;"></div>
+                    <div onclick="seleccionarcolor('#1c203e')" class="colores" style="background-color: #1c203e;"></div>
+                    <div onclick="seleccionarcolor('#47a1a8')" class="colores" style="background-color: #47a1a8;"></div>
+                    <div onclick="seleccionarcolor('#5fd079')" class="colores" style="background-color: #5fd079;"></div>
+                    <div onclick="seleccionarcolor('#154854')" class="colores" style="background-color: #154854;"></div>
+                    <div onclick="seleccionarcolor('#7b6cc9')" class="colores" style="background-color: #7b6cc9;"></div>
+                    <div onclick="seleccionarcolor('#868686')" class="colores" style="background-color: #868686;"></div>
+                    <div onclick="seleccionarcolor('#fd7377')" class="colores" style="background-color: #fd7377;"></div>
+                    
+                </div>
+
+                <div style="margin-bottom: 16px; position: relative;">
+                    <input id="nombredelnuevomodulo" type="text" name="mmodulo" value="" placeholder="Nombre del modulo" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
                     <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
                         <img src="https://img.icons8.com/material-outlined/24/cccccc/building.png" alt="Company Icon">
-                    </span>
-                </div>
-                    <div style="margin-bottom: 16px; position: relative; width:49%;">
-                        <input readonly type="text" value="<?php echo $informaciondelmmmodulo['fecha_creacion'];?>" name="Suscripción" placeholder="Suscripción" style="width: 100%; padding: 6px; padding-left:40px; width:calc(98% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
-                        <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                            <img src="https://img.icons8.com/material-outlined/24/cccccc/calendar.png" alt="User Icon">
-                        </span>
-                    </div>
-                </div>
-
-                <div style="margin-bottom: 16px; position: relative;">
-                    <input type="text" name="mmodulo" value="<?php echo $informaciondelmmmodulo['nombre_mmodulo']; ?>" placeholder="Nombre de la mmodulo o razón social" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
-                    <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                        <img src="https://img.icons8.com/material-outlined/24/cccccc/building.png" alt="Company Icon">
-                    </span>
-                </div>
-
-                <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
-                    <div style="margin-bottom: 16px; position: relative; width:49%;">
-                        <input type="number" name="identificacion" value="<?php echo $informaciondelmmmodulo['nit'];?>" placeholder="Nit" style="width: 100%; padding: 6px; padding-left:40px; width:calc(96% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
-                        <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                            <img src="https://img.icons8.com/material-outlined/24/cccccc/identification-documents.png" alt="Identification Icon">
-                        </span>
-                    </div>
-                    <div style="margin-bottom: 16px; position: relative; width:49%;">
-                        <input type="number" name="empleados" value="<?php echo $informaciondelmmmodulo['numero_empleados'];?>" placeholder="No. Empleados" style="width: 100%; padding: 6px; padding-left:40px; width:calc(98% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
-                        <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                            <img src="https://img.icons8.com/material-outlined/24/cccccc/user.png" alt="User Icon">
-                        </span>
-                    </div>
-                </div>
-
-
-
-                <div style="margin-bottom: 16px; position: relative;">
-                    <input type="text" name="location" value="<?php echo $informaciondelmmmodulo['direccion'];?>" placeholder="Dirección de la sede principal" style="width: calc(99% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
-                    <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                        <img src="https://img.icons8.com/material-outlined/24/cccccc/marker.png" alt="Location Icon">
-                    </span>
-                </div>
-
-                <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
-                    <div style="margin-bottom: 16px; position: relative; width:49%;">
-                        <input type="number" value="<?php echo $informaciondelmmmodulo['telefono'];?>" name="Teléfono" placeholder="Teléfono" style="width: 100%; padding: 6px; padding-left:40px; width:calc(96% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
-                        <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                            <img src="https://img.icons8.com/material-outlined/24/cccccc/phone.png" alt="Identification Icon">
-                        </span>
-                    </div>
-                    <div style="margin-bottom: 16px; position: relative; width:49%;">
-                        <input type="number" value="<?php echo $informaciondelmmmodulo['whatsapp'];?>" name="WhatsApp" placeholder="WhatsApp" style="width: 100%; padding: 6px; padding-left:40px; width:calc(98% - 40px); border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
-                        <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                            <img src="https://img.icons8.com/material-outlined/24/cccccc/whatsapp.png" alt="User Icon">
-                        </span>
-                    </div>
-                </div>
-
-                <div style="margin-bottom: 16px; position: relative;">
-                    <input type="text" value="<?php echo $informaciondelmmmodulo['representante_legal'];?>" name="representante" placeholder="Representante legal" style="width: calc(100% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
-                    <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                        <img src="https://img.icons8.com/material-outlined/24/cccccc/businessman.png" alt="Representative Icon">
-                    </span>
-                </div>
-
-                <div style="margin-bottom: 16px; position: relative;">
-                    <input type="text" value="<?php echo $informaciondelmmmodulo['sitio_web'];?>" name="web" placeholder="Sitio web" style="width: calc(100% - 40px); padding: 6px; padding-left:40px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333;">
-                    <span style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: #ccc;">
-                        <img src="https://img.icons8.com/material-outlined/24/cccccc/internet.png" alt="Website Icon">
                     </span>
                 </div>
 
                 <div style="margin-bottom: 10px; position: relative;">
-                    <textarea name="descripcion" placeholder="Descripcion de la mmodulo" rows="3" style="width: 98%; padding: 6px 6px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 14px; background-color: #FAFBFE; color: #333; resize: none;"><?php echo $informaciondelmmmodulo['descripcion_mmodulo'];?></textarea>
+                    <textarea id="descripciondelnuevomodulo" name="descripciondelnuevomodulo" placeholder="Descripcion de la mmodulo" rows="3" style="width: 98%; aspect-ratio:1/.5; padding: 6px 6px; border: 3px solid #F6F8FB; border-radius: 8px; font-size: 16px; background-color: #FAFBFE; color: #333; resize: none;"></textarea>
                 </div>
 
                 <div style="width:100%; display:flex; flex-direction:row; justify-content:space-between;">
                     <div style="margin-bottom: 16px; position: relative; width:50%;"> 
-                        <button onclick="guradrmmmodulomodificado()" style="cursor:pointer; background-color:#ffffff; color:#47A1A8; border-radius:10px; border: 2px solid #47A1A8; width:100%;height:35px;font-weight:600;">Cerrar</button>
+                        <button onclick="cerrarmmmodulomodificado()" style="cursor:pointer; background-color:#ffffff; color:#47A1A8; border-radius:10px; border: 2px solid #47A1A8; width:100%;height:35px;font-weight:600;">Cerrar</button>
                     </div>
                     <div style="margin-bottom: 16px; position: relative; width:50%; margin-left:2%;">
                         <button onclick="guradrmmmodulomodificado()" style="cursor:pointer; background-color:#47A1A8; color:#ffffff; border-radius:10px; border:none; width:100%;height:35px;font-weight:600;">Guardar</button>
@@ -318,7 +310,8 @@ $informaciondelmmmodulo = [
 
 
     <script>
-        var mmmodulo = <?php echo json_encode($modulossseleccionar); ?>;
+        
+        var modulos = <?php echo json_encode($msdemmodulo); ?>;
         var usuarioaeliminar = "";
 
         function filtrarmmoduloss() {
@@ -376,8 +369,40 @@ $informaciondelmmmodulo = [
 
         
         function guradrmmmodulomodificado(){
+
+            let nombredelnuevomodulo = document.getElementById('nombredelnuevomodulo').value;
+            let divcolor = document.getElementById('fondoicono');
+            let colorFondo = window.getComputedStyle(divcolor).backgroundColor;
+            let imgElemento = document.getElementById('iconoseleccionado');
+            let rutaImagen = imgElemento.src; 
+            let nombreImagen = rutaImagen.substring(rutaImagen.lastIndexOf('/') + 1);
+            let siguienteId = obtenerSiguienteId();
+            let descripcion = document.getElementById('descripciondelnuevomodulo').value;
+
+            if(nombredelnuevomodulo){
+
+                if(descripcion){
+
+                    mostrarnuevomodulo(siguienteId,nombredelnuevomodulo,colorFondo,nombreImagen);
+
+                    showAlert("Se ha creado un nuevo modulo","success");
+                    const slideDivmmmodulo = document.getElementById('slideDivmmmodulo');
+                    slideDivmmmodulo.classList.remove('active');
+                }else{
+                    showAlert("La *descripcion* del modulo no es valida","error");
+                }
+
+            }else{
+                showAlert("El *nombre* del modulo no es valido","error");
+            }
+
+            
+        }
+
+        function cerrarmmmodulomodificado(){
             const slideDivmmmodulo = document.getElementById('slideDivmmmodulo');
             slideDivmmmodulo.classList.remove('active'); 
+            showAlert("NO se ha creado un nuevo modulo","alerta");
         }
 
          
@@ -389,7 +414,7 @@ $informaciondelmmmodulo = [
         function toggleswitchmmmodulo(usuarioId) {
             var switchmmmoduloElement = document.getElementById("switchmmmodulo" + usuarioId);
             var estado = switchmmmoduloElement.checked ? 1 : 0;  
-                        var slider = switchmmmoduloElement.nextElementSibling;
+            var slider = switchmmmoduloElement.nextElementSibling;
             var color = estado === 1 ? '#47A1A8' : '#FD7377';  
             slider.style.backgroundColor = color;
             actualizarEstado(usuarioId, estado);
@@ -423,17 +448,18 @@ $informaciondelmmmodulo = [
 
 
 
-
+        let moduloseleccionado = "";
         
 
         function seleccionarmmodulo(id) {
+
+            mostrardocumentos(id);
+            moduloseleccionado = id;
 
             const mmoduloss = document.querySelectorAll('.mmodulossc'); 
             const nombremmoduloss = document.querySelectorAll('.nombremmodulo');
             const eliminarmmodulo = document.querySelectorAll('.eliminarmmodulo');
             const editarmmodulo = document.querySelectorAll('.editarmmodulo');
-
-            document.getElementById('listadedocumentos').style.display = "flex";
 
             mmoduloss.forEach(emp => {
                 emp.style.backgroundColor = '#F2F3F6';
@@ -477,13 +503,6 @@ $informaciondelmmmodulo = [
                 }
             });
         }
-
-
-
-
-
-
-
 
         var acordeones = document.querySelectorAll('.abriracordion');  // Seleccionamos solo los elementos <p>
 
@@ -539,7 +558,498 @@ $informaciondelmmmodulo = [
             }
         }
 
+        const images = ["img/1.svg", "img/2.svg","img/3.svg","img/4.svg","img/5.svg","img/6.svg","img/7.svg","img/8.svg","img/9.svg","img/10.svg","img/11.svg","img/12.svg","img/13.svg","img/14.svg","img/15.svg","img/16.svg","img/17.svg","img/18.svg","img/19.svg",];
+        let currentIndex = 0; 
+        function moveSlide(direction) {
+            if (direction === 'left') {
+                currentIndex = (currentIndex - 1 + images.length) % images.length; 
+            } else if (direction === 'right') {
+                currentIndex = (currentIndex + 1) % images.length; 
+            }
+            document.getElementById("iconoseleccionado").src = images[currentIndex];
+        }
+
+        function seleccionarcolor(color) {
+            document.getElementById('fondoicono').style.backgroundColor = color;
+        }
+
+        function guardartodo(){
+            showAlert("Se han guardado los cambios","success");
+        }
+
+
+
+        /////////////////////////////
         
+
+        function mostrarnuevomodulo(id, nombre, color, icono) {
+            const listaModulo = document.getElementById('listammmodulo');
+            const nuevoModulo = document.createElement('div');
+            nuevoModulo.id = `mmodulo${id}`;
+            nuevoModulo.className = 'mmodulossc';
+            nuevoModulo.style.cssText = `
+                width: 100%; 
+                aspect-ratio: 25/1; 
+                margin-bottom: .6%; 
+                background-color: #F2F3F6; 
+                border-radius: .5vw; 
+                display: flex; 
+                flex-direction: row; 
+                align-items: center; 
+                cursor: pointer;
+            `;
+            nuevoModulo.onclick = () => seleccionarmmodulo(id);
+
+            // Crear el sub-div para el icono
+            const iconDiv = document.createElement('div');
+            iconDiv.style.cssText = `
+                height: 150%; 
+                border-radius: 5px; 
+                aspect-ratio: 1/1; 
+                background-color: ${color}; 
+                margin-left: 1%;
+            `;
+
+            // Crear la imagen del icono
+            const iconImg = document.createElement('img');
+            iconImg.src = `img/${icono}`;
+            iconImg.alt = 'icono';
+            iconImg.style.height = '100%';
+            iconDiv.appendChild(iconImg);
+
+            // Crear el párrafo del nombre
+            const nombreParrafo = document.createElement('p');
+            nombreParrafo.id = `nombremmodulo${id}`;
+            nombreParrafo.className = 'nombremmodulo';
+            nombreParrafo.style.cssText = `
+                margin-left: 2%; 
+                width: 80%; 
+                font-size: .9vw;
+            `;
+            nombreParrafo.textContent = nombre;
+
+            // Crear el contenedor de los botones
+            const botonesDiv = document.createElement('div');
+            botonesDiv.style.cssText = `
+                width: 10%; 
+                height: 100%; 
+                display: flex; 
+                flex-direction: row; 
+                justify-content: flex-end; 
+                align-items: center;
+            `;
+
+            // Crear el botón de eliminar
+            const eliminarImg = document.createElement('img');
+            eliminarImg.id = `eliminarmmodulo${id}`;
+            eliminarImg.className = 'eliminarmmodulo';
+            eliminarImg.src = 'https://img.icons8.com/material-outlined/24/47A1A8/delete.png';
+            eliminarImg.alt = 'Delete Icon';
+            eliminarImg.style.cssText = `
+                height: 80%; 
+                margin-right: 8%; 
+                cursor: pointer;
+            `;
+            eliminarImg.onclick = () => eliminarmmmodulo(id);
+
+            // Crear el botón de editar
+            const editarImg = document.createElement('img');
+            editarImg.id = `editarmmodulo${id}`;
+            editarImg.className = 'editarmmodulo';
+            editarImg.src = 'https://img.icons8.com/material-outlined/24/47A1A8/edit.png';
+            editarImg.alt = 'Edit Icon';
+            editarImg.style.cssText = `
+                height: 80%; 
+                margin-right: 8%; 
+                cursor: pointer;
+            `;
+            editarImg.onclick = () => editarmmmodulo(id);
+
+            // Añadir los botones al contenedor
+            botonesDiv.appendChild(eliminarImg);
+            botonesDiv.appendChild(editarImg);
+
+            // Crear el contenedor del interruptor
+            const switchLabel = document.createElement('label');
+            switchLabel.className = 'switchmmmodulo';
+            switchLabel.style.cssText = `
+                margin-right: 2%; 
+                position: relative; 
+                display: inline-block; 
+                height: 100%; 
+                aspect-ratio: 1.8/1;
+            `;
+
+            // Crear el checkbox del interruptor
+            const switchInput = document.createElement('input');
+            switchInput.type = 'checkbox';
+            switchInput.id = `switchmmmodulo${id}`;
+            switchInput.checked = true;
+            switchInput.style.opacity = '0';
+            switchInput.style.width = '0';
+            switchInput.onchange = () => toggleswitchmmmoduloclientes(id);
+
+            // Crear el span del interruptor
+            const switchSpan = document.createElement('span');
+            switchSpan.className = 'slideres on';
+            switchSpan.style.cssText = `
+                display: flex; 
+                align-items: center; 
+                position: absolute; 
+                cursor: pointer; 
+                top: 10%; 
+                left: 10%; 
+                right: 0; 
+                bottom: 0; 
+                transition: 0.4s; 
+                border-radius: 100vw;
+            `;
+
+            // Crear el círculo interior del interruptor
+            const switchCircle = document.createElement('span');
+            switchCircle.style.cssText = `
+                position: absolute; 
+                content: ''; 
+                height: 75%; 
+                aspect-ratio: 1/1; 
+                border-radius: 50%; 
+                left: 8%; 
+                background-color: white; 
+                transition: 0.4s;
+            `;
+
+            // Añadir los elementos del interruptor
+            switchSpan.appendChild(switchCircle);
+            switchLabel.appendChild(switchInput);
+            switchLabel.appendChild(switchSpan);
+
+            // Añadir todos los elementos al nuevo módulo
+            nuevoModulo.appendChild(iconDiv);
+            nuevoModulo.appendChild(nombreParrafo);
+            nuevoModulo.appendChild(botonesDiv);
+            //nuevoModulo.appendChild(switchLabel);
+
+            // Añadir el nuevo módulo al contenedor
+            listaModulo.appendChild(nuevoModulo);
+        }
+
+        function obtenerSiguienteId() {
+            const divs = document.querySelectorAll('#listammmodulo .mmodulossc');
+            let maxId = 0;
+            divs.forEach(div => {
+                const match = div.id.match(/^mmodulo(\d+)$/);
+                if (match) {
+                    maxId = Math.max(maxId, parseInt(match[1], 10));
+                }
+            });
+            return maxId + 1;
+        }
+
+
+        /////////////////////////////
+
+        function mostrardocumentos(idmodulo) {
+            let documento = getModuloDocuments(idmodulo);
+            const acordeonContainer = document.querySelector('.acordeon-container');
+            acordeonContainer.replaceChildren();
+            if (Array.isArray(documento) && documento.length > 0) {
+                documento.forEach(doc => {
+                    agregarDocumento(doc.nombre, doc.url, 'formularioSeleccionado', doc.urlvideo, doc.descripcion);
+                });
+            } else {
+                alert('No se encontraron documentos para este módulo.');
+            }
+        }
+
+
+        function getModuloDocuments(moduloId) {
+        var msdemmodulo = <?php echo json_encode($msdemmodulo); ?>;
+        var modulo = msdemmodulo.find(function(modulo) {
+            return modulo.id === moduloId;
+        });
+        if (modulo) {
+            return modulo.documentos;
+        } else {
+            return [];
+        }
+        }
+
+
+        let contadorId = 0;
+        let documento = 0;
+        function agregarDocumento(titulo, urlDocumento, urlVideo, descripcion) {
+            contadorId++;
+
+            // Obtener el contenedor donde se agregarán los nuevos documentos
+            const acordeonContainer = document.querySelector('.acordeon-container');
+
+            // Crear la estructura del nuevo documento
+            const listadedocumentos = document.createElement('div');
+            listadedocumentos.style.width = '100%';
+            listadedocumentos.style.display = 'flex';
+            listadedocumentos.style.flexDirection = 'column';
+            listadedocumentos.id = 'documento'+contadorId;
+
+            const acordeonItem = document.createElement('div');
+            acordeonItem.classList.add('acordeon-item');
+            acordeonItem.setAttribute('draggable', 'true');
+            acordeonItem.id = `acordeon-item-${contadorId}`; // Asignar un ID único al acordeón
+
+            const acordeon = document.createElement('div');
+            acordeon.classList.add('acordeon');
+            acordeon.style.display = 'flex';
+            acordeon.style.flexDirection = 'row';
+            acordeon.style.paddingLeft = '3%';
+            acordeon.style.boxSizing = 'border-box';
+            acordeon.style.alignItems = 'center';
+            acordeon.style.justifyContent = 'space-between';
+            acordeon.style.cursor = 'pointer'; // Para permitir que sea clickeable y abra/cierre el panel
+
+            const pTitulo = document.createElement('p');
+            pTitulo.classList.add('abriracordion');
+            pTitulo.style.width = '70%';
+            pTitulo.textContent = titulo;
+
+            const imgEliminar = document.createElement('img');
+            imgEliminar.id = `eliminar-${contadorId}`;
+            imgEliminar.src = 'https://img.icons8.com/material-outlined/24/47A1A8/delete.png';
+            imgEliminar.alt = 'eliminar';
+            imgEliminar.style.height = '50%';
+            imgEliminar.style.marginRight = '3%';
+
+            imgEliminar.addEventListener('click', function() {
+                event.stopPropagation();
+                const numero = imgEliminar.id.match(/\d+$/)[0];
+                documento = numero;
+                document.getElementById('modaleliminardocumento').style.display = "flex";
+            });
+
+            acordeon.appendChild(pTitulo);
+            acordeon.appendChild(imgEliminar);
+
+            // Crear el panel del acordeón (el contenido que se mostrará/ocultará)
+            const panel = document.createElement('div');
+            panel.classList.add('panel'); // Asegurarnos de tener un estilo para los paneles en el acordeón
+            panel.style.display = 'none'; // Inicialmente oculto
+            panel.style.marginTop = '-10px'; // Separar del título
+
+            // Contenedor de los inputs y el formulario
+            const contenedorFormulario = document.createElement('div');
+            //contenedorFormulario.style.marginBottom = '16px';
+
+            // Input para URL del documento
+            const contenedorInputDocumento = document.createElement('div');
+            //contenedorInputDocumento.style.marginBottom = '16px';
+            contenedorInputDocumento.style.display = 'flex';
+            contenedorInputDocumento.style.justifyContent = 'space-between';
+            contenedorInputDocumento.style.alignItems = 'center';
+
+            const inputDocumento = document.createElement('input');
+            inputDocumento.id = `ulrdelfile-${contadorId}`; // ID único para el input
+            inputDocumento.type = 'text';
+            inputDocumento.name = 'mmodulo';
+            inputDocumento.value = urlDocumento || '';
+            inputDocumento.placeholder = 'URL de documento ejemplo';
+            inputDocumento.style.width = '67%';
+            inputDocumento.style.padding = '8px';
+            inputDocumento.style.border = '2px solid #F6F8FB';
+            inputDocumento.style.borderRadius = '8px';
+            inputDocumento.style.fontSize = '14px';
+            inputDocumento.style.backgroundColor = '#FAFBFE';
+            inputDocumento.style.color = '#333';
+
+            // Botón para subir un archivo
+            const labelSubir = document.createElement('label');
+            labelSubir.setAttribute('for', `fileInput-${contadorId}`); // ID único para el input de archivo
+            labelSubir.style.cursor = 'pointer';
+            labelSubir.style.width = '28%';
+            labelSubir.style.height = '36px';
+            labelSubir.style.backgroundColor = '#47A1A8';
+            labelSubir.style.borderRadius = '10px';
+            labelSubir.style.display = 'flex';
+            labelSubir.style.alignItems = 'center';
+            labelSubir.style.justifyContent = 'center';
+            labelSubir.style.border = '2px solid #47A1A8';
+
+            const pSubir = document.createElement('p');
+            pSubir.style.color = '#ffffff';
+            pSubir.style.fontSize = '14px';
+            pSubir.style.margin = '0';
+            pSubir.textContent = 'Subir ejemplo';
+            labelSubir.appendChild(pSubir);
+
+            const inputFile = document.createElement('input');
+            inputFile.type = 'file';
+            inputFile.id = `fileInput-${contadorId}`;
+            inputFile.style.display = 'none';
+            inputFile.addEventListener('change', function() {
+                inputDocumento.value = this.files[0]?.name || '';
+            });
+
+            contenedorInputDocumento.appendChild(inputDocumento);
+            contenedorInputDocumento.appendChild(labelSubir);
+            contenedorInputDocumento.appendChild(inputFile);
+
+            // Agregar el input para URL del documento al formulario
+            contenedorFormulario.appendChild(contenedorInputDocumento);
+
+            // Select de formulario
+            const selectFormulario = document.createElement('select');
+            selectFormulario.name = '';
+            selectFormulario.id = `selectFormulario-${contadorId}`; // ID único para el select
+            selectFormulario.style.width = '100%';
+            selectFormulario.style.height = '36px';
+            selectFormulario.style.marginTop = '10px';
+            selectFormulario.style.border = '2px solid #F6F8FB';
+            selectFormulario.style.borderRadius = '8px';
+            selectFormulario.style.fontSize = '14px';
+            selectFormulario.style.backgroundColor = '#FAFBFE';
+            selectFormulario.style.color = '#333';
+
+            const optionDefault = document.createElement('option');
+            optionDefault.value = '';
+            optionDefault.selected = true;
+            optionDefault.disabled = true;
+            optionDefault.textContent = 'Seleccione un formulario si es necesario';
+
+            const optionFormulario = document.createElement('option');
+            optionFormulario.value = 'formulario1';
+            optionFormulario.textContent = 'Formulario 1';
+
+            selectFormulario.appendChild(optionDefault);
+            selectFormulario.appendChild(optionFormulario);
+
+            // Agregar el select al formulario
+            //contenedorFormulario.appendChild(selectFormulario);
+
+            // Input para URL de video explicativo
+            const inputVideo = document.createElement('input');
+            inputVideo.type = 'text';
+            inputVideo.value = urlVideo || '';
+            inputVideo.placeholder = 'URL de video explicativo';
+            inputVideo.style.marginTop = '10px';
+            inputVideo.style.width = '98%';
+            inputVideo.style.padding = '8px';
+            inputVideo.style.border = '2px solid #F6F8FB';
+            inputVideo.style.borderRadius = '8px';
+            inputVideo.style.fontSize = '14px';
+            inputVideo.style.backgroundColor = '#FAFBFE';
+            inputVideo.style.color = '#333';
+
+            // Agregar el input de video al formulario
+            contenedorFormulario.appendChild(inputVideo);
+
+            // Textarea para descripción del módulo
+            const textareaDescripcion = document.createElement('textarea');
+            textareaDescripcion.placeholder = 'Descripción del módulo';
+            textareaDescripcion.rows = 3;
+            textareaDescripcion.style.width = '98%';
+            textareaDescripcion.style.marginTop = '10px';
+            textareaDescripcion.style.padding = '8px';
+            textareaDescripcion.style.border = '2px solid #F6F8FB';
+            textareaDescripcion.style.borderRadius = '8px';
+            textareaDescripcion.style.fontSize = '14px';
+            textareaDescripcion.style.backgroundColor = '#FAFBFE';
+            textareaDescripcion.style.color = '#333';
+            textareaDescripcion.style.resize = 'none';
+            textareaDescripcion.value = descripcion || '';
+
+            // Agregar el textarea al formulario
+            contenedorFormulario.appendChild(textareaDescripcion);
+
+            // Botón para guardar
+            const botonGuardar = document.createElement('div');
+            botonGuardar.style.cursor = 'pointer';
+            botonGuardar.style.width = '30%';
+            botonGuardar.style.height = '36px';
+            botonGuardar.style.marginTop = '10px';
+            botonGuardar.style.backgroundColor = '#47A1A8';
+            botonGuardar.style.borderRadius = '10px';
+            botonGuardar.style.display = 'flex';
+            botonGuardar.style.alignItems = 'center';
+            botonGuardar.style.justifyContent = 'center';
+            botonGuardar.style.border = '2px solid #47A1A8';
+            botonGuardar.addEventListener('click', function() {
+                // Aquí puedes agregar la lógica para guardar el documento
+                console.log('Guardar documento');
+                showAlert("Documento guardado","success");
+            });
+
+            const pGuardar = document.createElement('p');
+            pGuardar.style.color = '#ffffff';
+            pGuardar.style.fontSize = '14px';
+            pGuardar.textContent = 'Guardar documento';
+
+            botonGuardar.appendChild(pGuardar);
+
+            // Agregar el botón de guardar al formulario
+            contenedorFormulario.appendChild(botonGuardar);
+
+            // Agregar el contenedor del formulario al panel
+            panel.appendChild(contenedorFormulario);
+
+            // Agregar acordeon y panel al item
+            acordeonItem.appendChild(acordeon);
+            acordeonItem.appendChild(panel);
+
+            // Agregar item al acordeón
+            listadedocumentos.appendChild(acordeonItem);
+
+            // Agregar documento a contenedor de acordeón
+            acordeonContainer.appendChild(listadedocumentos);
+
+            // Añadir funcionalidad de abrir/cerrar el acordeón
+            acordeon.addEventListener('click', function() {
+                panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+            });
+        }
+
+        function eliminardocuemnto(id) {
+            
+            const elemento = document.getElementById('documento'+ id);
+            if (elemento) {
+                elemento.remove(); // Elimina el elemento del DOM
+                console.log(`Elemento con ID ${id} eliminado.`);
+            } else {
+                console.warn(`Elemento con ID ${id} no encontrado.`);
+            }
+        }
+
+
+
+        function nuevodocumento(){
+            if(moduloseleccionado){
+                document.getElementById('modalnuevodocumento').style.display = "flex"
+            }else{
+                showAlert("No hay un modulo seleccionado","alerta");
+            }
+        }
+
+        function ocultarmodalsumardocumento(){
+            document.getElementById('modalnuevodocumento').style.display = "none"
+        }
+
+        function crearnuevodocumento(){
+            let nombre = document.getElementById('nombredelnuevodocumento').value;
+            agregarDocumento(nombre, '', '', '','');
+            ocultarmodalsumardocumento();
+        }
+
+        function confirmareliminardocumento(){
+            let palabraeliminardocumento = document.getElementById('palabraeliminardocumento').value;
+            if(palabraeliminardocumento === 'eliminar'){
+                eliminardocuemnto(documento);
+                document.getElementById('modaleliminardocumento').style.display = "none";
+                showAlert("El documento fue eliminado","success");
+            }else{
+                showAlert("La palabra *error* no coincide","error");
+            }
+        }
+
+        function cerrarmodaleliminardocumento(){
+            document.getElementById('modaleliminardocumento').style.display = "none";
+        }
+
 
     </script>
 </body>
