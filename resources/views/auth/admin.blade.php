@@ -5,13 +5,11 @@
 <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Habilita.Pro</title>
-    {!! RecaptchaV3::initJs() !!}
-    @vite(['resources/css/app.css', 'resources/css/home.css','resources/js/app.js'])
-
+    @vite('resources/js/alertas.js')
     <style>
         .container { display: flex; width: 100vw; height: 100vh; background-color: #F2F3F6; }
         .sidebar { width: 20%; display: flex; justify-content: center; margin-top:2%; min-width:250px;}
-        .sidebar-inner { width: 90%; height: 95%; background: #fff; border-radius: 14px; }
+        .sidebar-inner {width: 90%; height: 95%; background: #fff; border-radius: 14px; }
         .logo { width: 70%; aspect-ratio: 3/1; background: url(img/logo.png) center/90% no-repeat; margin: 11%; }
         .item { width: 80%; margin: 5px auto; display: flex; align-items: center; cursor: pointer; background-color:#47A1A8; border-radius:12px;}
         .item img { width: 15%; aspect-ratio: 1; }
@@ -61,22 +59,22 @@
         <!-- Content Area -->
         <div  class="content" id="ContenedorAdmin">
             <div id="clientes" class="component">
-                @component('components.clientes', ['titulo' => 'Listado de Clientes']) @endcomponent
+                @include('components.clientes', ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments, 'Reviews' => $Reviews, 'CompanyReviews' => $CompanyReviews])
             </div>
             <div id="permisos" class="component">
-                @component('components.permisos', ['titulo' => 'Permisos']) @endcomponent
+                @include('components.permisos',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments, 'Reviews' => $Reviews, 'CompanyReviews' => $CompanyReviews])
             </div>
             <div id="colaboradores" class="component">
-                @component('components.colaboradores', ['titulo' => 'Listado de Colaboradores']) @endcomponent
+                @include('components.colaboradores',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments, 'Reviews' => $Reviews, 'CompanyReviews' => $CompanyReviews])
             </div>
             <div id="normatividad" class="component">
-                @component('components.normatividad', ['titulo' => 'Listado de Modulos de Normatividad']) @endcomponent
+                @include('components.normatividad',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments, 'Reviews' => $Reviews, 'CompanyReviews' => $CompanyReviews])
             </div>
             <div id="facturacion" class="component">
-                @component('components.facturacion', ['titulo' => 'Facturación']) @endcomponent
+                @include('components.facturacion',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments, 'Reviews' => $Reviews,'CompanyReviews' => $CompanyReviews])
             </div>
             <div id="alertas" class="component">
-                @component('components.alertas', ['titulo' => 'Listado de Alertas']) @endcomponent
+                @include('components.alertas',  ['Companies' => $Companies, 'Typologies' => $Typologies, 'Departments' => $Departments, 'Reviews' => $Reviews,'CompanyReviews' => $CompanyReviews])
             </div>
         </div>
         
